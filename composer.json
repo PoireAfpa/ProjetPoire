@@ -1,0 +1,33 @@
+{
+  "name": "forticas/minimal-php-skeleton-mvc",
+  "description": "This is for education purpose",
+  "type": "project",
+  "keywords": [
+    "PHP",
+    "Basic",
+    "Mini",
+    "Framework"
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "license": "MIT",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Houssem TAYECH",
+      "email": "houssem@forticas.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.0.2",
+    "ext-pdo": "*",
+    "symfony/var-dumper": "^6.0",
+    "filp/whoops": "^2.14"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/",
+      "App\\core\\": "core/"
+    }
+  }
+}
