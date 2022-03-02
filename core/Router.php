@@ -47,7 +47,7 @@ class Router
                 $this->runWithExactMatch($action['callback']);
                 return;
             }
-
+        }
             $exploded_defined_path = explode("/", $action['path']);
 
             // compare length
