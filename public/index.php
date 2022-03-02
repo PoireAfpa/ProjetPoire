@@ -3,9 +3,9 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // Debogger
-$whoops = new \Whoops\Run;
-$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-$whoops->register();
+//$whoops = new \Whoops\Run;
+//$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+//$whoops->register();
 
 
 // TODO organiser la partie configuration
@@ -22,6 +22,8 @@ $router = new Router();
 $router->register('/post/#id', '\App\controller\TestController::index');
 
 /************ /Routes *************/
+//$router = new Router();
+//$router->register('/', '\App\controller\DefaultController::index');
 $router->run();
 
 
