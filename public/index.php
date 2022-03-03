@@ -18,12 +18,15 @@ define('BASE_URI', $config['base_uri']);
 use App\core\Router;
 
 $router = new Router();
-/************ Routes *************/
-$router->register('/post/#id', '\App\controller\TestController::index');
+
 
 /************ /Routes *************/
-//$router = new Router();
-//$router->register('/', '\App\controller\DefaultController::index');
+$router->register('/home', '\App\controller\DefaultController::afficherHome');
+//$router->register("/", '\App\controller\defaultController::afficherHome'); CA MARCHE PAS
+$router->register('/login', '\App\controller\userController::afficherLogin');
+$router->register('/logout', '\App\controller\userController::afficherLogout');
+$router->register('/dashboard', '\App\controller\userController::afficherDashboard');
+$router->register('/test', '\App\controller\userController::afficherTest');
 $router->run();
 
 
