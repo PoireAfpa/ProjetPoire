@@ -35,7 +35,7 @@
         <a class="nav-link<?php /* if ("/".($_SERVER['QUERY_STRING'])=="/dashboard"){echo" active";}*/?>" href="#"><strong>Contact</strong></a><!--VISIBLE QUAND CONNECTE-->
       </li>
       <li class="nav-item">
-        <a class="nav-link<?php /*if ("/".($_SERVER['QUERY_STRING'])=="/logout"){echo" active";}*/?>" href="#"><strong>Dashboard</strong></a> <!--INVISIBLE QUAND CONNECTE-->
+        <a class="nav-link<?php /*if ("/".($_SERVER['QUERY_STRING'])=="/logout"){echo" active";}*/?>" href="#"><strong>Dashboard</strong></a> <!--VISIBLE QUAND CONNECTE-->
       </li>
       <li class="nav-item">
         <a class="nav-link<?php /*if ("/".($_SERVER['QUERY_STRING'])=="/logout"){echo" active";}*/?>" href="#"><strong>Login</strong></a> <!--INVISIBLE QUAND CONNECTE-->
