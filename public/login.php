@@ -6,7 +6,7 @@
     <div class="alert alert-danger" role="alert">
         <?= $error ?>
    </div>
-    <?php endif; ?>
+    <?php endif;?>
 
 
     <form action="" method="post">
