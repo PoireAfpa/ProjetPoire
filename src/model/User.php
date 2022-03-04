@@ -9,6 +9,7 @@ class User extends Model
 private $idUser;
 private $loginUser;
 private $passUser;
+private $role;
 
     /**
      * @return mixed
@@ -48,6 +49,22 @@ private $passUser;
     public function setPassUser($passUser): void
     {
         $this->passUser = $passUser;
+    }
+
+        /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role): void
+    {
+        $this->role = $role;
     }
 
     public function getAll()
