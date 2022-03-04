@@ -17,7 +17,7 @@
 
 <p>Pour toute demande, remplissez le formulaire ci-dessous.</p>
 
-<form action ="mail.php" method="post" autocomplete="off">
+
 
     <label>Nom : </label>
     <input type="text" id="name"  >
@@ -32,21 +32,26 @@
     <textarea id="body"  required> </textarea>
     
 
-    <input type="submit" value="Envoyer" name="Envoyer le message" onclick="sendEmail()" >
+    <input type="submit" value="Envoyer" name="Envoyer le message"  >
 </form>
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"> </script>
 
-<script type="text/javascript">   
+<script type="text/javascript">  
+document.getElementById("myForm").addEventListener("submit",function(e){
+    e.preventDefault()
+    sendEmail()
+}) 
 function sendEmail(){
+  console.log("ok")
     var name = $("#name");
     var email = $("#email");
     var subject = $("#subject");
     var body = $("#body");
 
 
-    if(isNotEmpty(name) && isNotEmpty(email) && isNotEmpty(subject) && isNotEmpty(body)){
+   
         $.ajax({
             url: 'mail.php',
             method: 'POST',
@@ -61,7 +66,7 @@ function sendEmail(){
                 $('sent-notification').text("Votre Message a bien été envoyé.");
             }
         });
-    }
+  
 }
 
 function isNotEmpty(caller){
