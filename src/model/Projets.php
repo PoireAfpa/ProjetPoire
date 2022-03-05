@@ -76,13 +76,22 @@ private $typeProjet;
         return $projets;
     }
 
-    public function getOneById(int $codeProjet)
+    public function getOneById(int $codeProjet) : ?Projets
     {
         $projet = Dao::getOne(self::class,
             [
                 'codeProjet' => $codeProjet
             ]);
+        if ($projet == false)
+        {
+            $projet = null;
+        }
         return $projet;
+    }
+
+    public function insert()
+    {
+        Dao::insertOne($this,  get_object_vars($this));
     }
 
 }

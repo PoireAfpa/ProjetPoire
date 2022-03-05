@@ -5,7 +5,7 @@ namespace App\model;
 use App\core\Dao;
 use App\core\Model;
 
-class User extends Model
+class Users extends Model
 {
 
 // déclarer les propriétés
@@ -86,20 +86,22 @@ private $role;
         return $users;
     }
 
-    public function getOneById(int $idUser)
+    public function getOneById(int $idUser) : ?Users
     {
-
         $user = Dao::getOne(self::class,
             [
                 'idUser' => $idUser
             ]);
+        if ($user == false)
+        {
+            $user = null;
+        }
         return $user;
     }
 
-    /* 
-    public function insert(){
-        Dao::insertOne($this,get_object_vars($this));
+    public function insert()
+    {
+        Dao::insertOne($this,  get_object_vars($this));
     }
-    */
 
 }
