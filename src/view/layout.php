@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- CSS & JS links for geolocation map-->
+    <link rel="stylesheet" type="text/css" href="stylemap.css" />
+    <script src="indexmap.js"></script>
+
 
 </head>
 <body>
@@ -71,8 +75,8 @@
             
                 <div class="place">
                     <span class="fas fa-map-marker-alt"></span>
-                    <span class="text">39 Local Host </span>
-                    <span class="text">99999 VERGERS</span>
+                    <span class="text">3 Allée de la Grande Egalonne</span>
+                    <span class="text">35740 PACÉ</span>
                 </div>  
                 <div class="phone">
                     <span class="fas fa-phone-alt"></span>
@@ -89,11 +93,16 @@
                     repudiandae corporis asperiores, tenetur repellendus dolore quibusdam quam vitae illo amet? 
           </div>
     </div>
+
+    <!-- Geolocation map-->
     <div class="col text-end ">
-      <h4 class="fs-5 text p-1">Géolocalisation à venir</h4>
+      <!--The div element for the map -->
+      <div id="map"></div>
     </div>
+
   </div>
 </div>
+
   <!-- Copyright -->
         <div class="text-center p-3" style="background-color: #8fcdf6;">
     © 2022 Copyright:
@@ -102,6 +111,9 @@
   <!-- Copyright -->
     </div>
 </footer>
+
+<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLiBq3ZJOp4DFHowwSkni3sgejNpE_HN0&callback=initMap&libraries=&v=weekly" async></script>
 
 </body>
 </html>
