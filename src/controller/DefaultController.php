@@ -1,5 +1,5 @@
 <?php
-namespace App\view\controller;
+namespace App\src\controller;
 use App\core\Controller;
 
 //recup requetes

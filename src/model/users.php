@@ -103,5 +103,14 @@ private $role;
     {
         Dao::insertOne($this,  get_object_vars($this));
     }
-
+    public function getOneByLogin($loginuser):?Users  {
+        $user=Dao::getOne(self::class, ["loginUser"=>$loginuser]);
+        if ($user==false){
+          
+           $user=null;
+          
+       }
+       
+       return $user;
+       }
 }

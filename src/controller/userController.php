@@ -2,41 +2,52 @@
 
 namespace App\src\controller;
 
+use App\model\Users;
 use App\core\Controller;
-use App\src\model\Users;
-use App\src\model\Contrat;
 use App\src\model\Clients;
+use App\src\model\Contrat;
+use App\src\model\Projets;
 use App\src\model\Contacts;
 use App\src\model\Documents;
-use App\src\model\Projets;
 
 class UsersController extends Controller{
 
     public function afficherLogin(){  
         if(strtolower($_SERVER["REQUEST_METHOD"])=="get"){
-            $this->renderView("pages/login");
+
+        $this->renderView("view/login");
+
         }
         elseif(strtolower($_SERVER["REQUEST_METHOD"])=="post"){
-            if (isset($_POST["email"]) && isset($_POST["password"])){
-                $user=(new User())->getOneByMail(($_POST["email"]));
+
+            if (isset($_POST["loginUser"]) && isset($_POST["passUser"])){
+
+                $user=(new Users())-> getOneByLogin(($_POST["loginUser"]));
                     if (is_null($user)){
-                        $this->renderView("pages/login", ['error'=>"Fucking message"]);
-                        return;
+                      
+                            $this->renderView("view/login", ['error'=>"Fucking message"]);
+                    return;
                     }
-                    if (password_verify($_POST['password'], $user->getPassword())){
-                        session_start();
-                        $role=$user->getRole();
-                        $_SESSION["role"]=$role;
-                        $_SESSION["isLogged"]=true;
-                        $user->beforeInsertInSession();
-                        $_SESSION["user"]=$user;
+                    if (/*password_verify*/($_POST['passUser']== $user->getPassUser())){
+                    session_start();
+                    $role=$user->getRole();
+                    $_SESSION["role"]=$role;
+                    $_SESSION["isLogged"]=true;
+                    $user->beforeInsertInSession();
+                    $_SESSION["user"]=$user;
                  
-                        $this->redirectToRoute("dashboard");
-                    }
-                    else{
-                        $this->renderView("pages/login", ['error'=>"Fucking mdp"]); 
-                        return;
-                    }
+                    $this->redirectToRoute("dashboard");
+                   
+                }
+                else{
+                    var_dump($user);
+                    var_dump($_POST['passUser']);
+                    var_dump($_POST['passuser']);
+
+                    $this->renderView("view/login", ['error'=>"Fucking mdp"]); 
+                    return;
+                }
+            
             }
         }
     }
@@ -51,9 +62,14 @@ class UsersController extends Controller{
         session_start();
         if (!isset($_SESSION["isLogged"])||($_SESSION["isLogged"]=false))
         {
+          
             $this->redirectToRoute("login");
         }
-        $this->renderView("pages/dashboard"); 
-    }
+     
+           $this->renderView("/../src/view/dashboard");
+           
 
+ 
+           
+    }
 }
