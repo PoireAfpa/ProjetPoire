@@ -1,6 +1,5 @@
 <?php
-
-namespace App\src\controller;
+namespace App\controller;
 
 use App\model\Users;
 use App\core\Controller;

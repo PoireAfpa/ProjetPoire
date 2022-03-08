@@ -1,5 +1,5 @@
 <?php
-namespace App\src\controller;
+namespace App\controller;
 use App\core\Controller;
 
 //recup requetes
@@ -16,11 +16,11 @@ public function afficherHome(){
     
         session_start();
     if (!empty($_SESSION)){
-        $this->renderView("../view/pages/home");
+        $this->renderView("../view/home");
 
 }else{
     session_destroy();
-    $this->renderView("../view/pages/home");
+    $this->renderView("../view/home");
 }
 
 }

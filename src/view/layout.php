@@ -96,7 +96,7 @@
 
     <!-- Geolocation map-->
     <div class="col text-end ">
-      <!--The div element for the map -->
+     
       <div id="map"></div>
     </div>
 

@@ -54,12 +54,12 @@ switch ( session_status() == PHP_SESSION_ACTIVE)  {
                               
                         if (isset($_POST['afficherClb'])){
 
-                                $userss= new Users();
+                                $users= new Users();
                                 $affichage=$nomUser->getAll();
                                
                                         foreach($affichage as $nomUser){
                                        
-                                $nomPUser->getNomProjet();
+                                $nomUser->getNomProjet();
                             
                                 $arrayNomUser=(array)$nomUser;
                                 

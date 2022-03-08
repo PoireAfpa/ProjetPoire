@@ -1,8 +1,7 @@
 <?php
 // test 2 naima
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ .'/../vendor/autoload.php';
 
-// Debogger
 //$whoops = new \Whoops\Run;
 //$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 //$whoops->register();
@@ -19,14 +18,16 @@ use App\core\Router;
 
 $router = new Router();
 
+var_dump($router);
+
 
 /************ /Routes *************/
-$router->register('/home', '\App\controller\DefaultController::afficherHome');
 //$router->register("/", '\App\controller\defaultController::afficherHome'); CA MARCHE PAS
-$router->register('/login', '\App\controller\userController::afficherLogin');
-$router->register('/logout', '\App\controller\userController::afficherLogout');
-$router->register('/dashboard', '\App\controller\userController::afficherDashboard');
-$router->register('/test', '\App\controller\userController::afficherTest');
+$router->register('/home', '\App\controller\DefaultController::afficherHome');
+$router->register('/login', '\App\controller\UsersController::afficherLogin');
+$router->register('/logout', '\App\controller\UsersController::afficherLogout');
+$router->register('/dashboard', '\App\controller\UsersController::afficherDashboard');
+$router->register('/contact', '\App\controller\UsersController::afficherTest');
 $router->run();
 
 

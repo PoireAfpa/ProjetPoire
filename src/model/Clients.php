@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\view\model;
+namespace App\model;
 
 use App\core\Dao;
 use App\core\Model;

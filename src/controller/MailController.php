@@ -1,9 +1,10 @@
-
 <?php
-require "vendor/autoload.php";
-use PHPMailer\PHPMailer\PHPMailer;
+namespace App\src\controller;
+
+
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
 
 if(isset($_POST['name']) && isset($_POST['email'])){
 $name = $_POST['name'];

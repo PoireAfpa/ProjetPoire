@@ -22,10 +22,16 @@ class Controller
             $$key = $value;
         }
         ob_start();
-        require_once __DIR__ . '/../src/view/' . $path . '.php';
+       
+      
+        require_once __DIR__.'../src/'.$path . '.php';
+      
         $content = ob_get_clean();
         if (!$isWithoutLayout)
-            require_once __DIR__ . '/../src/view/layout.php';
+      
+          
+                var_dump($path);
+            require_once  __DIR__.'../view/layout.php';
     }
 
     /**

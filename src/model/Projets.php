@@ -5,7 +5,7 @@ namespace App\model;
 use App\core\Dao;
 use App\core\Model;
 
-class Projet extends Model
+class Projets extends Model
 {
 
 // déclarer les propriétés

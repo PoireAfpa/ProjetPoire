@@ -32,6 +32,9 @@ class Router
      */
     public function run()
     {
+        var_dump($this);
+       
+       
         $request = $_SERVER['REQUEST_URI'];
         // remove get params
         if ($question_mark_position = strpos($request, '?')) {
@@ -45,11 +48,15 @@ class Router
             if ($request_without_base_uri == $action['path']) {
 
                 $this->runWithExactMatch($action['callback']);
+                var_dump($action['path']);
+                var_dump($action['callback']);
+                var_dump($_SERVER['REQUEST_URI']);
                 return;
             }
         }
-            $exploded_defined_path = explode("/", $action['path']);
+            
             foreach ($this->actions as $action){
+                $exploded_defined_path = explode("/", $action['path']);
             // compare length
             if (count($exploded_defined_path) == count($exploded_request_uri)) {
 
@@ -76,6 +83,7 @@ class Router
      */
     private function runWithExactMatch(string $callback)
     {
+       
         [$controller, $method] = explode("::", $callback);
         $controller_instance = new $controller();
         $controller_instance->$method();
