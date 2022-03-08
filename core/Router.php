@@ -8,23 +8,7 @@ namespace App\core;
  * @package App\core
  * @author Houssem TAYECH <houssem@forticas.com>
  */
-class Router
-{
-    /**
-     * @var array
-     */
-    private array $actions = [];
 
-    /**<?php
-declare(strict_types=1);
-
-namespace App\core;
-
-/**
- * Class Router
- * @package App\core
- * @author Houssem TAYECH <houssem@forticas.com>
- */
 class Router
 {
     /**
