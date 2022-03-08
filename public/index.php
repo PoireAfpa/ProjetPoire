@@ -2,9 +2,9 @@
 // test 2 naima
 require_once __DIR__ .'/../vendor/autoload.php';
 
-//$whoops = new \Whoops\Run;
-//$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-//$whoops->register();
+$whoops = new \Whoops\Run;
+$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+$whoops->register();
 
 
 // TODO organiser la partie configuration
@@ -18,7 +18,6 @@ use App\core\Router;
 
 $router = new Router();
 
-var_dump($router);
 
 
 /************ /Routes *************/
@@ -28,6 +27,8 @@ $router->register('/login', '\App\controller\UsersController::afficherLogin');
 $router->register('/logout', '\App\controller\UsersController::afficherLogout');
 $router->register('/dashboard', '\App\controller\UsersController::afficherDashboard');
 $router->register('/contact', '\App\controller\UsersController::afficherTest');
+$router->register('/dahsboard/add-client', '\App\controller\ClientsController::addClient');
+$router->register('/dahsboard/list-client', '\App\controller\ClientsController::list');
 $router->run();
 
 

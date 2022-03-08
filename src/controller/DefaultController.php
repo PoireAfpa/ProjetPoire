@@ -16,11 +16,11 @@ public function afficherHome(){
     
         session_start();
     if (!empty($_SESSION)){
-        $this->renderView("../view/home");
+        $this->renderView("home");
 
 }else{
     session_destroy();
-    $this->renderView("../view/home");
+    $this->renderView("home");
 }
 
 }

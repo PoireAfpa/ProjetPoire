@@ -32,7 +32,7 @@ class Router
      */
     public function run()
     {
-        var_dump($this);
+
        
        
         $request = $_SERVER['REQUEST_URI'];
@@ -48,9 +48,7 @@ class Router
             if ($request_without_base_uri == $action['path']) {
 
                 $this->runWithExactMatch($action['callback']);
-                var_dump($action['path']);
-                var_dump($action['callback']);
-                var_dump($_SERVER['REQUEST_URI']);
+
                 return;
             }
         }
