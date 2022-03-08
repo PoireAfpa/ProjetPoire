@@ -44,11 +44,11 @@
                 </li>
                 <?php if (session_status() == PHP_SESSION_ACTIVE) {
                     echo '  <li class="nav-item">
-        <a class="nav-link" href="http://localhost/projetpoire/logout"<?php if ("/".($_SERVER["QUERY_STRING"])=="/logout"){echo" active";}?>Logout</a>
+        <a class="nav-link" href="http://localhost/projetPoire/logout"<?php if ("/".($_SERVER["QUERY_STRING"])=="/logout"){echo" active";}?>Logout</a>
       </li>';
                 } else {
                     echo '<li class="nav-item">
-        <a class="nav-link" href="http://localhost/projetpoire/login">Login</a>
+        <a class="nav-link" href="http://localhost/projetPoire/login">Login</a>
       </li>';
                 }; ?>
 
