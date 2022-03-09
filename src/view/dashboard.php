@@ -1,488 +1,303 @@
 <main>
 <?php
 
-use App\model\Clients;
-use App\model\Users;
-use App\model\Projets;
 use App\core\Dao;
-switch ( session_status() == PHP_SESSION_ACTIVE)  {
-        case ($_SESSION["role"]=="Responsable RH"):
-            echo "  <form action='' method='post'>
-                        <div class='d-grid gap-2 col-6 mx-auto'>
-                        <button type='submit' class='btn btn-primary' name='createClb'>Créer un collaborateur</button>
-                        <button class='btn btn-primary' name='afficherClb'type='submit'>Afficher tous les collaborateurs</button>
-                        </div>
-                        </form>";
-                    if (isset($_POST['createClb'])){
-                            echo "<form  method='post'>
-                                <div class='form-group'>
-                                <label for='loginuser'>Nom d'utilisateur</label>
-                                <input type='text' class='form-control' name='loginuser'>
-                                </div>
+use App\model\Users;
+use App\model\Clients;
+use App\model\Projets;
+use App\model\Contacts;
+use App\controller\UsersController;
+if ( session_status() == PHP_SESSION_ACTIVE){
 
-                                <div class='form-group'>
-                                <label for='passuser'>Pass Utilisateur</label>
-                                <input type='text' class='form-control' name='passuser'>
-                                </div>
-
-                                <div class='form-group'>
-                                <div class='input-group mb-3'>
-                                <label class='input-group-text' for='inputGroupSelect01'>Rôles</label>
-                                <select name='role' class='form-select' id='inputGroupSelect01'>
-                                  <option selected>Choisissez...</option>
-                                  <option value='Responsable RH'>Responsable RH</option>
-                                  <option value='Commercial'>Commercial</option>
-                                  <option value='Responsable Développement'>Responsable Développement</option>
-                                  <option value='Technicien support'>Technicien support</option>
-                                  <option value='Secrétaire Technique'>Secrétaire Technique</option>
-                                </select>
-                                </div>
-                                </div>
-                                <button type='submit' class='btn btn-primary' name='insertClb' >Créer un collaborateur</button></li> 
-                                </form>
-                                ";
-                        };
-                        
-                        if (isset($_POST['insertClb'])){
-                                $user= new Users;
-                                DAO::insertOne($user,$user=[
-                                "loginuser"=>$_POST["loginuser"],
-                                "passuser"=>$_POST["passuser"],
-                                "role"=>$_POST["role"]]);
-                          
-                         
-                        };    
-                              
-                        if (isset($_POST['afficherClb'])){
-
-                                $users= new Users;
-                                $affichage=$nomUser->getAll();
-                               
-                                        foreach($affichage as $nomUser){
-                                       
-                                $nomUser->getNomProjet();
-                            
-                                $arrayNomUser=(array)$nomUser;
-                                echo "<div class='form-group'>
-                                <label for='loginuser'>Nom d'utilisateur</label>
-                                <input type='text' class='form-control' placeholder='".$arrayNomUser["passuser"]."' name='loginuser'>
-                                </div>";
-                                echo "</br>";
-                                echo "<div class='form-group'>
-                                <label for='loginuser'>Nom d'utilisateur</label>
-                                <input type='text' class='form-control' placeholder='".$arrayNomUser["passuser"]."' name='passuser'>
-                                </div>";
-                                echo " <div class='form-group'>
-                                <div class='input-group mb-3'>
-                                <label class='input-group-text' for='inputGroupSelect01'>Rôles</label>
-                                <select name='role' class='form-select' id='inputGroupSelect01'> <option selected>".$arrayNomUser["role"]. "menu</option>
-                                <option value='Responsable RH'>Responsable RH</option>
-                                <option value='Commercial'>Commercial</option>
-                                <option value='Responsable Développement'>Responsable Développement</option>
-                                <option value='Technicien support'>Technicien support</option>
-                                <option value='Secrétaire Technique'>Secrétaire Technique</option>
-                              </select>
-                              </div>
-                              </div></br>";
-                                echo "<button type='submit' class='btn btn-primary' name='modifyClb' >Créer un collaborateur</button>";
-                                };
-
-                        };
-                        if (isset($_POST['modifyClb'])){
-
-                                
-                                $edit= new Users;
-                                DAO::edit($user,$user=[
-                                        "loginuser"=>$_POST["loginuser"],
-                                        "passuser"=>$_POST["passuser"],
-                                        "role"=>$_POST["role"]]);
-
-                        };
-        break;
-
-        case ($_SESSION["role"]=="Secrétaire Technique"):
-                echo "  <form action='' method='post'><ul>
-                        <li ><a class='nav-item' href='http://localhost/projetPoire/test'><input type='submit' name='modifyClb' class='nav-link'/></a>Ajouter une mission</li>
-                        </ul></form>";
-
-                               
-                        if (isset($_POST['afficherClb'])){
-
-                                $users= new Users;
-                                $affichage=$nomUser->getAll();
-                               
-                                        foreach($affichage as $nomUser){
-                                       
-                                $nomUser->getNomProjet();
-                            
-                                $arrayNomUser=(array)$nomUser;
-                                echo "<div class='form-group'>
-                                <label for='loginuser'>Nom d'utilisateur</label>
-                                <input type='text' class='form-control' placeholder='".$arrayNomUser["passuser"]."' name='loginuser'>
-                                </div>";
-                                echo "</br>";
-                                echo "<div class='form-group'>
-                                <label for='loginuser'>Nom d'utilisateur</label>
-                                <input type='text' class='form-control' placeholder='".$arrayNomUser["passuser"]."' name='passuser'>
-                                </div>";
-                                echo " <div class='form-group'>
-                                <div class='input-group mb-3'>
-                                <label class='input-group-text' for='inputGroupSelect01'>Rôles</label>
-                                <select name='role' class='form-select' id='inputGroupSelect01'> <option selected>".$arrayNomUser["role"]. "menu</option>
-                                <option value='Responsable RH'>Responsable RH</option>
-                                <option value='Commercial'>Commercial</option>
-                                <option value='Responsable Développement'>Responsable Développement</option>
-                                <option value='Technicien support'>Technicien support</option>
-                                <option value='Secrétaire Technique'>Secrétaire Technique</option>
-                              </select>
-                              </div>
-                              </div></br>";
-                                echo "<button type='submit' class='btn btn-primary' name='modifyClb' >Créer un collaborateur</button>";
-                                };
-
-                        };
-                        if (isset($_POST['modifyClb'])){
-
-                                
-                                $edit= new Users;
-                                DAO::edit($user,$user=[
-                                        "loginuser"=>$_POST["loginuser"],
-                                        "passuser"=>$_POST["passuser"],
-                                        "role"=>$_POST["role"]]);
-
-                        };
-                            //VOIR TABLE USERS CONTRATS FONCTION
-            break;
-
-            case ($_SESSION["role"]=="Commercial"):
-                echo "  <form action='' method='post'>
-                <div class='d-grid gap-2 col-6 mx-auto'>
-                <button type='submit' class='btn btn-primary' name='createClt'>Créer un client</button>
-                <button class='btn btn-primary' name='afficherClt'type='submit'>Afficher tous les clients</button>
-                </div>
-                </form>";
-            if (isset($_POST['createClt'])){
-                    echo "<form  method='post'>
-                        <div class='form-group'>
-                        <label for='raisonsociale'>Raison Sociale</label>
-                        <input type='text' class='form-control' name='raisonsociale' placeholder='raisonsociale'>
-                        </div>
-
-                        <div class='form-group'>
-                        <label for='adresseclient'>Adresse Client</label>
-                        <input type='text' class='form-control' name='adresseclient' placeholder='adresseclient'>
-                        </div>
-
-                        <div class='form-group'>
-                        <label for='villeclient'>Ville Client</label>
-                        <input type='text' class='form-control' name='villeclient'>
-                        </div>
-                        <div class='form-group'>
-                        <label for='telephoneclient'>Téléphone Client</label>
-                        <input type='text' class='form-control' name='telephoneclient' placeholder='telephoneclient'>
-                        </div>
-
-                        <div class='form-outline'>
-                        <div class='input-group mb-3'>
-                        <label class='input-group-text' for='effectif'>Effectif</label>
-                        <input type='number' name='effectif' id='effectif' class='form-control'min='1' max=200'/>
-                      
-                        </div>
-                        </div>
-
-                        <div class='form-outline'>
-                        <div class='input-group mb-3'>
-                        <label class='input-group-text' for='ca'>Chiffre d'affaire</label>
-                        <input type='number' name='ca' id='ca' class='form-control'min='1' max=200'/>
-                        </div>
-                        </div>
-                        </form>
-
-                        <div class='form-group'>
-                        <label for='typeclient'>Type Client</label>
-                        <input type='text' class='form-control' name='typeclient' placeholder='typeclient'>
-                        </div>
-
-                        <div class='form-group'>
-                        <label for='natureclient'>Nature Client</label>
-                        <input type='text' class='form-control' name='natureclient' placeholder='natureclient'>
-                        </div>
-
-                        <div class='form-group'>
-                        <label for='commentaireclient'>Commentaire Client</label>
-                        <textarea type='textarea' class='form-control' name='commentaireclient' placeholder='commentaireclient'></textarea>
-                        </div>
-
-                        <div class='form-outline'>
-                        <div class='input-group mb-3'>
-                        <label class='input-group-text' for='idsect'>Secteur</label>
-                        <input type='number' name='idsect' id='idsect' class='form-control'min='1' max='30'/>
-                        </div>
-                        </div>
-                        <button type='submit' class='btn btn-primary' name='insertClt' >Créer un collaborateur</button></li> 
-                        </form>
-                        ";
-                          //VOIR PLACEHOLDER NUMBER
-                };
-                
-                if (isset($_POST['insertClb'])){
-                        $client= new Clients;
-                        DAO::insertOne($client,$client=[
-                        "raisonsociale"=>$_POST["raisonsociale"],
-                        "adresseclient"=>$_POST["adresseclient"],
-                        "secteur"=>$_POST["secteur"],
-                        "idsect"=>$_POST["idsect"],
-                        "codepostal"=>$_POST["codepostal"],
-                        "ca"=>$_POST["ca"],
-                        "effectif"=>$_POST["effectif"],
-                        "telephoneclient"=>$_POST["telephoneclient"],
-                        "typeclient"=>$_POST["typeclient"],
-                        "natureclient"=>$_POST["natureclient"],
-                        "commentaireclient"=>$_POST["commentaireclient"]
-                ]);
-                  
+//---------------------------------------------RH-----------------------------------------------------------------------------------------------------
+                if($_SESSION["role"]=="Responsable RH"){
+                   require_once __DIR__ . '/user/modals.php';
+                   echo '<form method="post"><div class="container-fluid"><div class="justify-content-center"><div class="btn-group col ">';
+                   echo '<div class="col-6"><button name="createClb" type="button" class="btn btn-success btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#modalAdd">
+                     Ajouter un collaborateur
+                   </button></div>';
+                   echo ' <div class="col-6"><input type="submit" value=" Afficher tous collaborateurs" class="btn btn-primary btn-lg btn-block" name="viewClb">
                  
-                };    
-                      
-                if (isset($_POST['afficherClt'])){
+                  </div>';
+                  echo'</div></div></div></form>';
+               
+                if (isset($_POST['viewClb'])){
+                    $collaborateurs= ((new Users)->getAll());
+                    $html=' <table class="table table-striped  table-dark"> <thead class="thead-light">';
+                    $html.='  <tr> <th class= "text-center " scope="col">ID</th>  <th class= "text-center " scope="col">LOGIN USER</th>
+                    <th class= "text-center " scope="col">PASS USER</th>
+                    <th class= "text-center " scope="col">ROLE USER</th>
+                    <th class= "text-center " scope="col">ACTIONS</th>
+                    <th><form method="post" ><input  type="submit" value="FERMER" name="closeList" class="btn-sm btn btn-primary"/></form></th>';
+                    $html.=' </tr> </thead>';
+                    $html.=' <tbody>';
+                  foreach($collaborateurs as $collaborateur){
 
-                        $client= new Clients;
-                        $affichage=$nomClient->getAll();
-                       
-                                foreach($affichage as $nomClient){
-                               
-                        $nomClient->getNomClient();
+                     $html.='<tr>';
+                     $html.='<td class= "text-center align-middle">'.$collaborateur->getIdUser().'</td>';
+                     $html.='<td class= "text-center align-middle">'.$collaborateur->getLoginUser().'</td>';
+                     $html.='<td class= "text-center align-middle">'.$collaborateur->getPassUser().'</td>';
+                     $html.='<td class= "text-center align-middle">'.$collaborateur->getRole().'</td>';
+                     $html.=' <td><button  data-id="'.$collaborateur->getIdUser().'" data-login="'.$collaborateur->getLoginUser().'" data-pas="'.$collaborateur->getRole().'" type="submit" name="editClb" data-bs-target="#modalEdit" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
+                     <td><input name="delClb"  value="Supprimer" type="submit" class="btn-sm btn btn-danger test" data-bs-toggle="modal" data-bs-target="#modalDel"/></a></td>';
                     
-                        $arrayNomClient=(array)$nomClient;
-                        echo "<form  method='post'>
-                        <div class='form-group'>
-                        <label for='raisonsociale'>Raison Sociale</label>
-                        <input type='text' class='form-control' name='raisonsociale' placeholder='".$arrayNomClient['raisonsociale']."'>
-                        </div>
+                  };
+                  $html.='</tr></tbody></table>';
+                  echo $html;
+                  if (isset($_POST['closeList'])){
+                      echo "fuck";
+                      $html="";
+                      echo $html;
 
-                        <div class='form-group'>
-                        <label for='adresseclient'>Adresse Client</label>
-                        <input type='text' class='form-control' name='adresseclient' placeholder='".$arrayNomClient['adresseclient']."'>
-                        </div>
+                  }
+                
+                    }}; 
+  //-----------------------------------------------------------SECRETAIRE TECHNIQUE-------------------------------------------------------------
+ 
+              
 
-                        <div class='form-group'>
-                        <label for='villeclient'>Ville Client</label>
-                        <input type='text' class='form-control' name='villeclient'>
-                        </div>
-                        <div class='form-group'>
-                        <label for='telephoneclient'>Téléphone Client</label>
-                        <input type='text' class='form-control' name='telephoneclient' placeholder='".$arrayNomClient['telephoneclient']."'>
-                        </div>
+                if($_SESSION["role"]=="Secrétaire Technique"){
+                  require_once __DIR__ . '/user/modals.php';
+                  echo '<form method="post"><div class="container-fluid"><div class="justify-content-center"><div class="btn-group col ">';
+                  echo '<div class="col-6"><input type="submit" value=" Afficher tous collaborateurs" class="btn btn-primary btn-lg btn-block" name="viewClb"> </div>';
+                  echo'</div></div></div></form>';
+              
+               if (isset($_POST['viewClb'])){
+                   $collaborateurs= ((new Users)->getAll());
+                   $html=' <table class="table table-striped  table-dark"> <thead class="thead-light">';
+                   $html.='  <tr> <th class= "text-center " scope="col">ID</th>  <th class= "text-center " scope="col">LOGIN USER</th>
+                   <th class= "text-center " scope="col">PASS USER</th>
+                   <th class= "text-center " scope="col">ROLE USER</th>
+                   <th class= "text-center " scope="col">ACTIONS</th>
+                   <th><form method="post" ><input  type="submit" value="FERMER" name="closeList" class="btn-sm btn btn-primary"/></form></th>';
+                   $html.=' </tr> </thead>';
+                   $html.=' <tbody>';
+                 foreach($collaborateurs as $collaborateur){
 
-                        <div class='form-outline'>
-                        <div class='input-group mb-3'>
-                        <label class='input-group-text' for='effectif'>Effectif</label>
-                        <input type='number' name='effectif' id='effectif' class='form-control'min='1' max=200'/>
-                      
-                        </div>
-                        </div>
+                    $html.='<tr>';
+                    $html.='<td class= "text-center align-middle">'.$collaborateur->getIdUser().'</td>';
+                    $html.='<td class= "text-center align-middle">'.$collaborateur->getLoginUser().'</td>';
+                    $html.='<td class= "text-center align-middle">'.$collaborateur->getPassUser().'</td>';
+                    $html.='<td class= "text-center align-middle">'.$collaborateur->getRole().'</td>';
+                    $html.=' <td><button  data-id="'.$collaborateur->getIdUser().'" data-login="'.$collaborateur->getLoginUser().'" data-pas="'.$collaborateur->getRole().'" type="submit" name="editClb" data-bs-target="#modalEdit" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>';
+                    
+                   
+                 };
+                 $html.='</tr></tbody></table>';
+                 echo $html;
+                 if (isset($_POST['closeList'])){
+                  
+                     $html="";
+                     echo $html;
 
-                        <div class='form-outline'>
-                        <div class='input-group mb-3'>
-                        <label class='input-group-text' for='ca'>Chiffre d'affaire</label>
-                        <input type='number' name='ca' id='ca' class='form-control'min='1' max=200'/>
-                        </div>
-                        </div>
-                        </form>
+                 }
 
-                        <div class='form-group'>
-                        <label for='typeclient'>Type Client</label>
-                        <input type='text' class='form-control' name='typeclient' placeholder='".$arrayNomClient['typeclient']."'>
-                        </div>
-
-                        <div class='form-group'>
-                        <label for='natureclient'>Nature Client</label>
-                        <input type='text' class='form-control' name='natureclient' placeholder='".$arrayNomClient['natureclient']."'>
-                        </div>
-
-                        <div class='form-group'>
-                        <label for='commentaireclient'>Commentaire Client</label>
-                        <textarea type='textarea' class='form-control' name='commentaireclient' placeholder='".$arrayNomClient['commentaireclient']."'></textarea>
-                        </div>
-
-                        <div class='form-outline'>
-                        <div class='input-group mb-3'>
-                        <label class='input-group-text' for='idsect'>Secteur</label>
-                        <input type='number' name='idsect' id='idsect' class='form-control'min='1' max='30'/>
-                        </div>
-                        </div>
-                       
-                        </form>
-                        ";
-                        echo "<button type='submit' class='btn btn-primary' name='modifyClt' >Créer un collaborateur</button>";
-                        };
-
-                };
-                if (isset($_POST['insertClt'])){
-                        $client= new Clients;
-                        DAO::edit($client,$client=[
-                        "raisonsociale"=>$_POST["raisonsociale"],
-                        "adresseclient"=>$_POST["adresseclient"],
-                        "secteur"=>$_POST["secteur"],
-                        "idsect"=>$_POST["idsect"],
-                        "codepostal"=>$_POST["codepostal"],
-                        "ca"=>$_POST["ca"],
-                        "effectif"=>$_POST["effectif"],
-                        "telephoneclient"=>$_POST["telephoneclient"],
-                        "typeclient"=>$_POST["typeclient"],
-                        "natureclient"=>$_POST["natureclient"],
-                        "commentaireclient"=>$_POST["commentaireclient"]
-                ]);
-        };
-            break;
-            case ($_SESSION["role"]=="Responsable Développement"):
-                echo "  <form action='' method='post'><ul>
-                        <button type='submit' class='btn btn-primary' name='createPjt'>Créer un projet</button>
-                        <button class='btn btn-primary' name='afficherPjt'type='submit'>Afficher les projets</button>
-                        <button class='btn btn-primary' name='afficherClb'type='submit'>Ajouter une mission</button>
-                        </ul></form>";
-                        if (isset($_POST['createPjt'])){
-                                echo "<form  method='post'>
-                                    <div class='form-group'>
-                                    <label for='nomprojet'>Nom du projet</label>
-                                    <input type='textaera' class='form-control' name='nomprojet'>
-                                    </div>
-    
-                                    <div class='form-group'>
-                                    <label for='typeprojet'>Type de projet</label>
-                                    <input type='text' class='form-control' name='typeprojet'>
-                                    </div>
-
-                                    <div class='form-group'>
-                                    <label for='abregeprojet'>Nom abrégé du projet</label>
-                                    <input type='text' class='form-control' name='abregeprojet'>
-                                    </div>
-    
-                                    <button type='submit' class='btn btn-primary' name='insertPjt' >Créer un projet</button></li> 
-                                    </form>
-                                    ";
-                                };
-                                  
-                      
-                                if (isset($_POST['insertPjt'])){
-                                        $projet= new Projets;
-                                        DAO::insertOne($projet,$projet=[
-                                        "nomprojet"=>$_POST["nomprojet"],
-                                        "typeprojet"=>$_POST["typeprojet"],
-                                        "abregeprojet"=>$_POST["abregeprojet"]]);
-                                };
-
-                                if (isset($_POST['afficherPjt'])){
-
-                                        $projects= new Projets();
-                                        $affichage=$projects->getAll();
-                                       
-                                                foreach($affichage as $nomProjet){
-                                               
-                                        $nomProjet->getNomProjet();
-                                    
-                                        $arrayNomProjet=(array)$nomProjet;
-                                        echo "<form  method='post'>
-                                    <div class='form-group'>
-                                    <label for='nomprojet'>Nom du projet</label>
-                                    <input type='textaera' class='form-control' name='nomprojet' placeholder='".$arrayNomProjet['nomprojet']."'>
-                                    </div>
-    
-                                    <div class='form-group'>
-                                    <label for='typeprojet'>Type de projet</label>
-                                    <input type='text' class='form-control' name='typeprojet' placeholder='".$arrayNomProjet['typeprojet']."'>
-                                    </div>
-
-                                    <div class='form-group'>
-                                    <label for='abregeprojet'>Nom abrégé du projet</label>
-                                    <input type='text' class='form-control' name='abregeprojet' placeholder='".$arrayNomProjet['abregeprojet']."'>
-                                    </div>
-    
-                                    <button type='submit' class='btn btn-primary' name='modifyPjt' >Créer un projet</button></li> 
-                                    </form>
-                                    ";
-                                       
-                                      
-                                        };
-                                };
+               }};
 
 
 
-                                      
-                                      
-                                        
-            break;
-            case ($_SESSION["role"]=="Technicien support"):
-                echo "  <form action='' method='post'><ul>
-                <button class='btn btn-primary' name='afficherPjt'type='submit'>Afficher les projets</button>
-                        </ul></form>";
-                        if (isset($_POST['createPjt'])){
-                                echo "<form  method='post'>
-                                    <div class='form-group'>
-                                    <label for='nomprojet'>Nom du projet</label>
-                                    <input type='textaera' class='form-control' name='nomprojet'>
-                                    </div>
-    
-                                    <div class='form-group'>
-                                    <label for='typeprojet'>Type de projet</label>
-                                    <input type='text' class='form-control' name='typeprojet'>
-                                    </div>
+  //-----------------------------------------------------------RESPONSABLE DEVELOPPEMENT---------------------------------------------------------- 
+  if($_SESSION["role"]=="Responsable développement"){
+    require_once __DIR__ . '/user/modals.php';
+    echo '<form method="post"><div class="container-fluid"><div class="justify-content-center"><div class="btn-group col ">';
+    echo '<div class="col-6"><button name="createPjt" type="button" class="btn btn-success btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#modalAddPjt">
+      Ajouter un projet
+    </button></div>';
+    echo ' <div class="col-6"><input type="submit" value=" Afficher les projets" class="btn btn-primary btn-lg btn-block" name="viewPjt">
+  
+   </div>';
+   echo'</div></div></div></form>';
 
-                                    <div class='form-group'>
-                                    <label for='abregeprojet'>Nom abrégé du projet</label>
-                                    <input type='text' class='form-control' name='abregeprojet'>
-                                    </div>
-    
-                                    <button type='submit' class='btn btn-primary' name='insertPjt' >Créer un projet</button></li> 
-                                    </form>
-                                    ";
-                                };
-                                  
-                      
-                                if (isset($_POST['insertPjt'])){
-                                        $projet= new Projets;
-                                        DAO::insertOne($projet,$projet=[
-                                        "nomprojet"=>$_POST["nomprojet"],
-                                        "typeprojet"=>$_POST["typeprojet"],
-                                        "abregeprojet"=>$_POST["abregeprojet"]]);
-                                };
+ if (isset($_POST['viewPjt'])){
+     $projets= ((new Projets)->getAll());
+     $html=' <table class="table table-striped  table-dark"> <thead class="thead-light">';
+     $html.='  <tr> <th class= "text-center " scope="col">CODE PROJET</th> 
+     <th class= "text-center " scope="col">ABREGE PROGE</th>
+     <th class= "text-center " scope="col">NOM PROJET</th>
+     <th class= "text-center " scope="col">TYPE PROJET</th>
+     <th class= "text-center " scope="col">ACTIONS</th>
+     <th><form method="post" ><input  type="submit" value="FERMER" name="closeList" class="btn-sm btn btn-primary"/></form></th>';
+     $html.=' </tr> </thead>';
+     $html.=' <tbody>';
+   foreach($projets as $projet){
 
-                                if (isset($_POST['afficherPjt'])){
+      $html.='<tr>';
+      $html.='<td class= "text-center align-middle">'.$projet->getCodeProjet().'</td>';
+      $html.='<td class= "text-center align-middle">'.$projet->getAbregeProjet().'</td>';
+      $html.='<td class= "text-center align-middle">'.$projet->getNomProjet().'</td>';
+      $html.='<td class= "text-center align-middle">'.$projet->getTypeProjet().'</td>';
+      $html.=' <td><button  data-id="'.$projet->getCodeProjet().'" data-login="'.$projet->getNomProjet().'" type="submit" name="editPjt" data-bs-target="#modalEditPjt" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
+      <td><input name="delPjt"  value="Supprimer" type="submit" class="btn-sm btn btn-danger test" data-bs-toggle="modal" data-bs-target="#modalDelPjt"/></a></td>';
+     
+   };
+   $html.='</tr></tbody></table>';
+   echo $html;
+   if (isset($_POST['closeList'])){
+     
+       $html="";
+       echo $html;
 
-                                        $projects= new Projets();
-                                        $affichage=$projects->getAll();
-                                       
-                                                foreach($affichage as $nomProjet){
-                                               
-                                        $nomProjet->getNomProjet();
-                                    
-                                        $arrayNomProjet=(array)$nomProjet;
-                                        echo "<form  method='post'>
-                                    <div class='form-group'>
-                                    <label for='nomprojet'>Nom du projet</label>
-                                    <input type='textaera' class='form-control' name='nomprojet' placeholder='".$arrayNomProjet['nomprojet']."'>
-                                    </div>
-    
-                                    <div class='form-group'>
-                                    <label for='typeprojet'>Type de projet</label>
-                                    <input type='text' class='form-control' name='typeprojet' placeholder='".$arrayNomProjet['typeprojet']."'>
-                                    </div>
+   }
+ 
+     }}; 
+  //-----------------------------------------------------------TECHNICIEN SUPPORT--------------------------------------------------------- 
+  if($_SESSION["role"]=="Technicien support"){
+    require_once __DIR__ . '/user/modals.php';
+    echo '<form method="post"><div class="container-fluid"><div class="justify-content-center"><div class="btn-group col ">';
+   
+    echo ' <div class="col-6"><input type="submit" value=" Afficher les projets" class="btn btn-primary btn-lg btn-block" name="viewPjt">
+  
+   </div>';
+   echo'</div></div></div></form>';
 
-                                    <div class='form-group'>
-                                    <label for='abregeprojet'>Nom abrégé du projet</label>
-                                    <input type='text' class='form-control' name='abregeprojet' placeholder='".$arrayNomProjet['abregeprojet']."'>
-                                    </div>
-    
-                                    <button type='submit' class='btn btn-primary' name='modifyPjt' >Créer un projet</button></li> 
-                                    </form>
-                                    ";
-                                       
-                                      
-                                        };
-                                };
-            break;
-        
-        }
+ if (isset($_POST['viewPjt'])){
+     $projets= ((new Projets)->getAll());
+     $html=' <table class="table table-striped  table-dark"> <thead class="thead-light">';
+     $html.='  <tr> <th class= "text-center " scope="col">CODE PROJET</th> 
+     <th class= "text-center " scope="col">ABREGE PROGE</th>
+     <th class= "text-center " scope="col">NOM PROJET</th>
+     <th class= "text-center " scope="col">TYPE PROJET</th>
+     <th class= "text-center " scope="col">ACTIONS</th>
+     <th><form method="post" ><input  type="submit" value="FERMER" name="closeList" class="btn-sm btn btn-primary"/></form></th>';
+     $html.=' </tr> </thead>';
+     $html.=' <tbody>';
+   foreach($projets as $projet){
+
+      $html.='<tr>';
+      $html.='<td class= "text-center align-middle">'.$projet->getCodeProjet().'</td>';
+      $html.='<td class= "text-center align-middle">'.$projet->getAbregeProjet().'</td>';
+      $html.='<td class= "text-center align-middle">'.$projet->getNomProjet().'</td>';
+      $html.='<td class= "text-center align-middle">'.$projet->getTypeProjet().'</td>';
+      $html.=' <td><button  data-id="'.$projet->getCodeProjet().'" data-login="'.$projet->getNomProjet().'" type="submit" name="editPjt" data-bs-target="#modalEditPjt" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>';
+     
+   };
+   $html.='</tr></tbody></table>';
+   echo $html;
+   if (isset($_POST['closeList'])){
+     
+       $html="";
+       echo $html;
+
+   }
+ 
+     }}; 
+ 
+
+};
+ //-----------------------------------------------------------COMMERCIAL---------------------------------------------------------  
+ if($_SESSION["role"]=="Commercial"){
+  require_once __DIR__ . '/user/modals.php';
+  echo '<form method="post"><div class="container-fluid"><div class="justify-content-center"><div class="btn-group col ">';
+  echo '<div class="col-3"><button name="createClt" type="button" class="btn btn-success btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#modalAddClt">
+    Ajouter un client
+  </button></div>';
+  echo '<div class="col-3"><button name="createCntct" type="button" class="btn btn-success btn-lg btn-block" data-bs-toggle="modal" data-bs-target="#modalAddCntct">
+    Ajouter un contact client
+  </button></div>';
+  echo ' <div class="col-3"><input type="submit" value=" Afficher les clients" class="btn btn-primary btn-lg btn-block" name="viewClt"> </div>';
+  echo ' <div class="col-3"><input type="submit" value=" Afficher les contacts clients" class="btn btn-primary btn-lg btn-block" name="viewCntct"></div>';
+
+ echo'</div></div></div></form>';
+
+if (isset($_POST['viewClt'])){
+   $clients= ((new Clients)->getAll());
+   $html=' <table class="table table-striped  table-dark"> <thead class="thead-light">';
+   $html.='  <tr> <th class= "text-center " scope="col">ID</th> 
+   <th class= "text-center " scope="col">RAISON SOCIALE</th>
+   <th class= "text-center " scope="col">ADRESSE</th>
+   <th class= "text-center " scope="col">CODE POSTAL</th>
+   <th class= "text-center " scope="col">VILLE</th>
+   <th class= "text-center " scope="col">CHIFFRE D\'AFFAIRE</th>
+   <th class= "text-center " scope="col">EFFECTIF</th>
+   <th class= "text-center " scope="col">TELEPHONE</th>
+   <th class= "text-center " scope="col">TYPE</th>
+   <th class= "text-center " scope="col">NATURE</th>
+   <th class= "text-center " scope="col">COMMENTAIRES</th> 
+   <th class= "text-center " scope="col">ACTIONS</th>
+   <th><form method="post" ><input  type="submit" value="FERMER" name="closeList" class="btn-sm btn btn-primary"/></form></th>';
+   $html.=' </tr> </thead>';
+   $html.=' <tbody>';
+ foreach($clients as $client){
+
+    $html.='<tr>';
+    $html.='<td class= "text-center align-middle">'.$client->getIdclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$client->getRaisonsocial().'</td>';
+    $html.='<td class= "text-center align-middle">'.$client->getAdresseclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$client->getCodepostal().'</td>';
+    $html.='<td class= "text-center align-middle">'.$client->getVilleclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$client->getCa().'</td>';
+    $html.='<td class= "text-center align-middle">'.$client->getEffectif().'</td>';
+    $html.='<td class= "text-center align-middle">'.$client->getTelephoneclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$client->getTypeclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$client->getNatureclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$client->getCommentaireclient().'</td>';
+
+
+
+    $html.=' <td><button  data-id="'.$client->getIdclient().'" data-login="'.$client->getRaisonsocial().'" type="submit" name="editClt" data-bs-target="#modalEditClt" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
+    <td><input name="delClt"  value="Supprimer" type="submit" class="btn-sm btn btn-danger test" data-bs-toggle="modal" data-bs-target="#modalDelClt"/></a></td>';
+   
+ };
+ if (isset($_POST['viewCntct'])){
+  $contacts= ((new Contacts)->getAll());
+  $html=' <table class="table table-striped  table-dark"> <thead class="thead-light">';
+  $html.='  <tr> <th class= "text-center " scope="col">ID</th> 
+  <th class= "text-center " scope="col">NOM CONTACT</th>
+  <th class= "text-center " scope="col">PRENOM CONTACT</th>
+  <th class= "text-center " scope="col">TELEPHONE</th>
+  <th class= "text-center " scope="col">MAIL</th>
+  <th class= "text-center " scope="col">PHOTO</th>
+  <th class= "text-center " scope="col">DUREE</th>
+  <th class= "text-center " scope="col">ACTIONS</th>
+  <th><form method="post" ><input  type="submit" value="FERMER" name="closeList" class="btn-sm btn btn-primary"/></form></th>';
+  $html.=' </tr> </thead>';
+  $html.=' <tbody>';
+foreach($contacts as $contact){
+
+   $html.='<tr>';
+   $html.='<td class= "text-center align-middle">'.$contact->getIdContact().'</td>';
+   $html.='<td class= "text-center align-middle">'.$contact->getNomContact().'</td>';
+   $html.='<td class= "text-center align-middle">'.$contact->getPrenomContact().'</td>';
+   $html.='<td class= "text-center align-middle">'.$contact->getTelContact().'</td>';
+   $html.='<td class= "text-center align-middle">'.$contact->getEmailContact().'</td>';
+   $html.='<td class= "text-center align-middle">'.$contact->getPhoto().'</td>';
+   $html.='<td class= "text-center align-middle">'.$contact->getDuree().'</td>';
+   
+
+
+
+   $html.=' <td><button  data-id="'.$contact->getIdcontact().'" data-login="'.$contact->getNomContact().'" type="submit" name="editCntct" data-bs-target="#modalEditCntct" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
+   <td><input name="delCntct"  value="Supprimer" type="submit" class="btn-sm btn btn-danger test" data-bs-toggle="modal" data-bs-target="#modalDelCntct"/></a></td>';
+  
+};
+ $html.='</tr></tbody></table>';
+ echo $html;
+ if (isset($_POST['closeList'])){
+   
+     $html="";
+     echo $html;
+
+ }
+
+   }}}; 
+
+
+
+
 ?>
+      
+ </main>
 
-</main>
+
+
+
+
+
+
+
+
+
+
+
+
+

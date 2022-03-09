@@ -8,7 +8,6 @@ namespace App\core;
  * @package App\core
  * @author Houssem TAYECH <houssem@forticas.com>
  */
-
 class Router
 {
     /**

@@ -38,6 +38,7 @@ class Controller
      */
     public function redirectTo(string $path): void
     {
+       
         header("Location: $path");
     }
 
@@ -47,6 +48,7 @@ class Controller
      */
     public function redirectToRoute(string $path): void
     {
+        
         header("Location: {$_SERVER["REQUEST_SCHEME"]}://{$_SERVER["HTTP_HOST"]}" . BASE_URI . "/$path");
     }
 
@@ -56,6 +58,7 @@ class Controller
      */
     public function json(array $content): void
     {
+       
         header('Content-Type: application/json');
         echo json_encode($content);
         die;

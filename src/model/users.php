@@ -1,17 +1,17 @@
 <?php
-
 namespace App\model;
 
 use App\core\Dao;
 use App\core\Model;
 
+
 class Users extends Model
 {
 
 // déclarer les propriétés
-private $idUser;
-private $loginUser;
-private $passUser;
+private $iduser;
+private $loginuser;
+private $passuser;
 private $role;
 
     /**
@@ -19,7 +19,7 @@ private $role;
      */
     public function getIdUser()
     {
-        return $this->idUser;
+        return $this->iduser;
     }
 
     /**
@@ -27,15 +27,15 @@ private $role;
      */
     public function getLoginUser()
     {
-        return $this->loginUser;
+        return $this->loginuser;
     }
 
     /**
      * @param mixed $username
      */
-    public function setLoginUser($loginUser): void
+    public function setLoginUser($loginuser): void
     {
-        $this->loginUser = $loginUser;
+        $this->loginuser = $loginuser;
     }
 
     /**
@@ -43,24 +43,24 @@ private $role;
      */
     public function getPassUser()
     {
-        return $this->passUser;
+        return $this->passuser;
     }
 
     public function beforeInsertInSession()
     {
-        unset($this->passUser);
+        unset($this->passuser);
     }
 
     /**
-     * @param mixed $passUser
+     * @param mixed $passuser
      */
-    public function setPassUser(string $passUser): void
+    public function setPassUser(string $passuser): void
     {
-        if (strlen($passUser) <6 )
+        if (strlen($passuser) <6 )
         {
             throw new \Exception("Le mot de passe est trop court");
         }
-        $this->passUser = password_hash($passUser, PASSWORD_BCRYPT);
+        $this->passuser = password_hash($passuser, PASSWORD_BCRYPT);
     }
 
         /**
@@ -86,11 +86,11 @@ private $role;
         return $users;
     }
 
-    public function getOneById(int $idUser) : ?Users
+    public function getOneById(int $iduser) : ?Users
     {
         $user = Dao::getOne(self::class,
             [
-                'idUser' => $idUser
+                'iduser' => $iduser
             ]);
         if ($user == false)
         {
@@ -104,7 +104,7 @@ private $role;
         Dao::insertOne($this,  get_object_vars($this));
     }
     public function getOneByLogin($loginuser):?Users  {
-        $user=Dao::getOne(self::class, ["loginUser"=>$loginuser]);
+        $user=Dao::getOne(self::class, ["loginuser"=>$loginuser]);
         if ($user==false){
           
            $user=null;
@@ -113,4 +113,5 @@ private $role;
        
        return $user;
        }
+   
 }
