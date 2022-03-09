@@ -1,13 +1,13 @@
 <?php
 namespace App\controller;
 
-use App\model\Users;
 use App\core\Controller;
 use App\src\model\Clients;
 use App\src\model\Contrat;
 use App\src\model\Projets;
 use App\src\model\Contacts;
 use App\src\model\Documents;
+use App\model\Users;
 
 class UsersController extends Controller{
    
@@ -86,10 +86,10 @@ class UsersController extends Controller{
        if ($user->getLoginUser()!=$_POST["loginuser"]){
            $args["loginuser"]=$_POST["loginuser"];
        }
-       if ($user->getLoginUser()!=$_POST["passuser"]){
+       if ($user->getPassUser()!=$_POST["passuser"]){
         $args["passuser"]=$_POST["passuser"];
     }
-    if ($user->getLoginUser()!=$_POST["role"]){
+    if ($user->getRole()!=$_POST["role"]){
         $args["role"]=$_POST["role"];
     }
     $user->edit($args);

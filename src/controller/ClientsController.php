@@ -23,7 +23,7 @@ class ClientsController extends Controller
         {
             $client = new Clients();
             $client->setIdsect($_POST['idsect']);
-            $client->setRaisonsocial($_POST['raisonsocial']);
+            $client->setRaisonsociale($_POST['raisonsocial']);
             $client->setCa($_POST['ca']);
             $client->setAdresseclient($_POST['adresseclient']);
             $client->setCodepostal($_POST['codepostal']);

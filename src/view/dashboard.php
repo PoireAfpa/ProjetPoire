@@ -8,6 +8,7 @@ use App\model\Projets;
 use App\model\Contacts;
 use App\controller\UsersController;
 if ( session_status() == PHP_SESSION_ACTIVE){
+ 
 
 //---------------------------------------------RH-----------------------------------------------------------------------------------------------------
                 if($_SESSION["role"]=="Responsable RH"){
@@ -99,6 +100,7 @@ if ( session_status() == PHP_SESSION_ACTIVE){
                    <th><form method="post" ><input  type="submit" value="FERMER" name="closeList" class="btn-sm btn btn-primary"/></form></th>';
                    $html.=' </tr> </thead>';
                    $html.=' <tbody>';
+                   $modalEdit="";
                  foreach($collaborateurs as $collaborateur){
 
                     $html.='<tr>';
@@ -107,7 +109,30 @@ if ( session_status() == PHP_SESSION_ACTIVE){
                     $html.='<td class= "text-center align-middle">'.$collaborateur->getPassUser().'</td>';
                     $html.='<td class= "text-center align-middle">'.$collaborateur->getRole().'</td>';
                     $html.=' <td><button  data-id="'.$collaborateur->getIdUser().'" data-login="'.$collaborateur->getLoginUser().'" data-pas="'.$collaborateur->getRole().'" type="submit" name="editClb" data-bs-target="#modalEdit" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>';
+                    $modalEdit.= '
+                    <div class="modal fade" id="modalEdit'.$collaborateur->getIdUser().'" tabindex="-1" >
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalEditLabel">Modifier un collaborateur</h5>
                     
+                        </div>
+                        <form action="'.BASE_URI.'/dahsboard/user/edit/'.$collaborateur->getIdUser().'" method="post">
+                        <div class="modal-body">
+                        <input type="text" id="login" value="'.$collaborateur->getLoginUser().'" class="form-control" placeholder="Login user" name="loginuser">
+                        <input type="text" value="'.$collaborateur->getPassUser().'" class="form-control" placeholder="Pass user" name="passuser">
+                        <input type="text" value="'.$collaborateur->getRole().'"class="form-control" placeholder="Pass user" name="role">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Modifier</button>
+                          <button  type="submit" name="docClb" class="btn btn btn-success">Ajouter doc</button>
+                        </div>
+                        </form>
+                      </div>
+                    </div>
+                    </div>'
+                    ;
                    
                  };
                  $html.='</tr></tbody></table>';
@@ -146,6 +171,7 @@ if ( session_status() == PHP_SESSION_ACTIVE){
      <th><form method="post" ><input  type="submit" value="FERMER" name="closeList" class="btn-sm btn btn-primary"/></form></th>';
      $html.=' </tr> </thead>';
      $html.=' <tbody>';
+     $modalEdit="";
    foreach($projets as $projet){
 
       $html.='<tr>';
@@ -155,7 +181,30 @@ if ( session_status() == PHP_SESSION_ACTIVE){
       $html.='<td class= "text-center align-middle">'.$projet->getTypeProjet().'</td>';
       $html.=' <td><button  data-id="'.$projet->getCodeProjet().'" data-login="'.$projet->getNomProjet().'" type="submit" name="editPjt" data-bs-target="#modalEditPjt" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
       <td><input name="delPjt"  value="Supprimer" type="submit" class="btn-sm btn btn-danger test" data-bs-toggle="modal" data-bs-target="#modalDelPjt"/></a></td>';
-     
+      $modalEdit.= '
+      <div class="modal fade" id="modalEdit'.$collaborateur->getIdUser().'" tabindex="-1" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalEditLabel">Modifier un collaborateur</h5>
+      
+          </div>
+          <form action="'.BASE_URI.'/dahsboard/projet/edit/'.$projet->getCodeProjet().'" method="post">
+          <div class="modal-body">
+          <input type="text" value="'.$projet->getAbregeProjet().'" class="form-control" placeholder="Abregé projet" name="abregeprojet">
+          <input type="text" value="'.$projet->getNomProjet().'" class="form-control" placeholder="Nom projet" name="nomprojet">
+          <input type="text" value="'.$projet->getTypeProjet().'"class="form-control" placeholder="Type projet" name="typeprojet">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Modifier</button>
+            <button  type="submit" name="docClb" class="btn btn btn-success">Ajouter doc</button>
+          </div>
+          </form>
+        </div>
+      </div>
+      </div>'
+      ;
    };
    $html.='</tr></tbody></table>';
    echo $html;
