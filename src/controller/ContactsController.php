@@ -1,14 +1,9 @@
 <?php
+
 namespace App\controller;
 
 use App\core\Controller;
-use App\src\model\Clients;
 use App\src\model\Contacts;
-use App\src\model\Contrat;
-use App\src\model\Documents;
-use App\src\model\Projets;
-use App\src\model\Users;
-
 
 class ContactsController extends Controller{
 
