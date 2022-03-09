@@ -22,13 +22,28 @@ class ClientsController extends Controller
         if($_SERVER['REQUEST_METHOD'] == "POST")
         {
             $client = new Clients();
+            $client->setIdsect($_POST['idsect']);
+            $client->setRaisonsocial($_POST['raisonsocial']);
             $client->setCa($_POST['ca']);
             $client->setAdresseclient($_POST['adresseclient']);
-            /* TODO remplir toutes les propriétés du client */
+            $client->setCodepostal($_POST['codepostal']);
+            $client->setVilleclient($_POST['villeclient']);
+            $client->setEffectif($_POST['effectif']);
+            $client->setTelephoneclient($_POST['telephoneclient']);
+            $client->setTypeclient($_POST['typeclient']);
+            $client->setNatureclient($_POST['natureclient']);
+            $client->setCommentaireclient($_POST['commentaireclient']);
+            
             
             $client->insert();
         }
         
         $this->renderView("client/add");
+    }
+
+    public function deleteClient($idclient) 
+    {   
+        $client = (new Clients())->delete($idclient);
+        $this->renderView("client/list");
     }
 }

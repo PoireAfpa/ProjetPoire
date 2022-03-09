@@ -58,12 +58,12 @@
                 <tr>
                     <td><label style="color:#3a87ad; font-size:18px;">CA</label></td>
                     <td width="30"></td>
-                    <td><input type="text" name="ca" placeholder="ca" required /></td>
+                    <td><input type="number" name="ca" placeholder="ca" required /></td>
                 </tr>
                 <tr>
                     <td><label style="color:#3a87ad; font-size:18px;">effectif</label></td>
                     <td width="30"></td>
-                    <td><input type="text" name="effectif" placeholder="effectif" required /></td>
+                    <td><input type="number" name="effectif" placeholder="effectif" required /></td>
                 </tr>
                 <tr>
                     <td><label style="color:#3a87ad; font-size:18px;">Telephone</label></td>

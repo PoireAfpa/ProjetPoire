@@ -44,6 +44,18 @@ class Clients extends Model
         return $this->idsect;
     }
 
+        /**
+     * Set the value of idsect
+     *
+     * @return  self
+     */ 
+    public function setIdsect($idsect)
+    {
+        $this->idsect = $idsect;
+
+        return $this;
+    }
+
     /**
      * Get the value of raisonsocial
      */ 
@@ -265,5 +277,10 @@ class Clients extends Model
     {
 
         Dao::insertOne($this,  get_object_vars($this));
+    }
+
+    public function delete($idclient) 
+    {
+        Dao::delete(self::class, ['idclient' => $idclient]);
     }
 }
