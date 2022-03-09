@@ -33,8 +33,8 @@ $router->register('/dahsboard/client/edit/#idclient', '\App\controller\ClientsCo
 $router->register('/dahsboard/client/delete/#idclient', '\App\controller\ClientsController::delete');
 $router->register('/dahsboard/projet/list', '\App\controller\ProjetsController::list');
 $router->register('/dahsboard/projet/add', '\App\controller\ProjetsController::add');
-$router->register('/dahsboard/projet/edit/#idprojet', '\App\controller\ProjetsController::edit');
-$router->register('/dahsboard/projet/delete/#idprojet', '\App\controller\ProjetsController::delete');
+$router->register('/dahsboard/projet/edit/#codeprojet', '\App\controller\ProjetsController::edit');
+$router->register('/dahsboard/projet/delete/#codeprojet', '\App\controller\ProjetsController::delete');
 $router->register('/dahsboard/contact/list', '\App\controller\ContactsController::list');
 $router->register('/dahsboard/contact/add', '\App\controller\ContactsController::add');
 $router->register('/dahsboard/contact/edit/#idcontact', '\App\controller\ContactsController::edit');
