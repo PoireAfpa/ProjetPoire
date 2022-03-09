@@ -1,23 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\model;
 
 use App\core\Dao;
 use App\core\Model;
 
-class Contacts extends Model
-{
-
-// déclarer les propriétés
-private $idContact;
-private $idClient;
-private $idFonc;
-private $nomContact;
-private $prenomContact;
-private $telContact;
-private $emailContact;
-private $photo;
-private $duree;
+/**
+ * Class Contacts
+ * @package App\src\model
+ * @author Poire Afpa <poire.afpa@gmail.com>
+ */
+class Contacts extends Model{
+    private $idContact;
+    private $idClient;
+    private $idFonc;
+    private $nomContact;
+    private $prenomContact;
+    private $telContact;
+    private $emailContact;
+    private $photo;
+    private $duree;
 
     /**
      * @return mixed
@@ -177,6 +181,11 @@ private $duree;
     public function insert()
     {
         Dao::insertOne($this,  get_object_vars($this));
+    }
+
+    public function delete(int $idContact)
+    {
+        Dao::delete(self::class, ['idContact' => $idContact]);
     }
 
 }
