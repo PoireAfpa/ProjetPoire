@@ -16,7 +16,7 @@ class Clients extends Model
 {
     private int $idclient;
     private int $idsect;
-    private string $raisonsociale;
+    private string $raisonsocial;
     private string $adresseclient;
     private string $codepostal;
     private string $villeclient;
@@ -59,9 +59,9 @@ class Clients extends Model
     /**
      * Get the value of raisonsociale
      */ 
-    public function getRaisonsociale()
+    public function getRaisonsocial()
     {
-        return $this->raisonsociale;
+        return $this->raisonsocial;
     }
 
     /**
@@ -69,9 +69,9 @@ class Clients extends Model
      *
      * @return  self
      */ 
-    public function setRaisonsociale($raisonsociale)
+    public function setRaisonsocial($raisonsocial)
     {
-        $this->raisonsociale = $raisonsociale;
+        $this->raisonsocial = $raisonsocial;
 
         return $this;
     }
