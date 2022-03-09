@@ -1,9 +1,9 @@
 <?php
+
 namespace App\model;
 
 use App\core\Dao;
 use App\core\Model;
-
 
 class Users extends Model
 {
@@ -113,5 +113,12 @@ private $role;
        
        return $user;
        }
-   
+   public function edit($args){
+    Dao::edit(self::class,  $args, [
+        "iduser"=>$this->iduser
+    ]);
+
+   }
+
+
 }

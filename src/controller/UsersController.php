@@ -1,126 +1,100 @@
 <?php
-declare(strict_types=1);
+namespace App\controller;
 
-namespace App\core;
+use App\model\Users;
+use App\core\Controller;
+use App\src\model\Clients;
+use App\src\model\Contrat;
+use App\src\model\Projets;
+use App\src\model\Contacts;
+use App\src\model\Documents;
 
-/**
- * Class Router
- * @package App\core
- * @author Houssem TAYECH <houssem@forticas.com>
- */
-class Router
-{
-    /**
-     * @var array
-     */
-    private array $actions = [];
+class UsersController extends Controller{
+   
+    public function afficherLogin(){  
+      
+        if(strtolower($_SERVER["REQUEST_METHOD"])=="get"){
+   
+        $this->renderView("login");
 
-    /**
-     * @param string $path
-     * @param string $callback
-     * @return void
-     */
-    public function register(string $path, string $callback)
-    {
-        $this->actions[] = [
-            'path' => $path, 'callback' => $callback
-        ];
-    }
-
-    /**
-     * @return void
-     */
-    public function run()
-    {
-        $request = $_SERVER['REQUEST_URI'];
-        // remove get params
-        if ($question_mark_position = strpos($request, '?')) {
-            $request = substr($request, 0, $question_mark_position);
         }
-        $request_without_base_uri = str_replace(BASE_URI, "", $request);
-        $exploded_request_uri = explode("/", $request_without_base_uri);
-
-
-        foreach ($this->actions as $action) {
-            // la route match without variables
-            if ($request_without_base_uri == $action['path']) {
-                $this->runWithExactMatch($action['callback']);
-                return;
-            }
-        }
-        foreach ($this->actions as $action) {
-            $exploded_defined_path = explode("/", $action['path']);
-            // compare length
-            if (count($exploded_defined_path) == count($exploded_request_uri)) {
-
-                if (count(array_intersect($exploded_defined_path, $exploded_request_uri)) > 1) {
-                    $args = [];
-                    $isValid = true;
-                    foreach ($exploded_defined_path as $key => $value) {
-                        if (str_starts_with($value, "#")) {
-                            $args[] = $exploded_request_uri[$key];
-                        }elseif ($exploded_defined_path[$key] != $exploded_request_uri[$key])
-                        {
-                            $isValid = false;
-                            break;
-                        }
+        elseif(strtolower($_SERVER["REQUEST_METHOD"])=="post"){
+  
+            if (isset($_POST["loginuser"]) && isset($_POST["passuser"])){
+     
+                $user=(new Users())-> getOneByLogin(($_POST["loginuser"]));
+             
+                    if (is_null($user)){
+              
+                            $this->renderView("login", ['error'=>"Fucking message"]);
+                    return;
                     }
-                    if (!$isValid) continue;
-                    $this->runWithParams($action['callback'], $args);
+                    if (/*password_verify*/($_POST['passuser']== $user->getPassUser())){
+                 
+                    session_start();
+                    $role=$user->getRole();
+                    $_SESSION["role"]=$role;
+                    $_SESSION["isLogged"]=true;
+                    $user->beforeInsertInSession();
+                    $_SESSION["user"]=$user;
+                 
+                    $this->redirectToRoute("dashboard");
+                   
+                }
+                else{
+              
+
+                    $this->renderView("login", ['error'=>"Fucking mdp"]); 
                     return;
                 }
+            
             }
         }
-
-        $this->showPageNotFound();
-
     }
 
-    /**
-     * @param string $callback
-     * @return void
-     */
-    private function runWithExactMatch(string $callback)
-    {
-        [$controller, $method] = explode("::", $callback);
-        $controller_instance = new $controller();
-        $controller_instance->$method();
-
+    public function afficherLogout(){
+        session_start();
+        session_destroy();
+        $this->redirectToRoute("login");
     }
 
-    /**
-     * @param string $callback
-     * @param array $params
-     * @return void
-     */
-    private function runWithParams(string $callback, array $params)
-    {
-        if (empty($params) || in_array("", $params)) {
-            $this->showPageNotFound();
-            return;
+    public function afficherDashboard(){ 
+        session_start();
+        if (!isset($_SESSION["isLogged"])||($_SESSION["isLogged"]=false))
+        {
+          
+            $this->redirectToRoute("login");
         }
-        [$controller, $method] = explode("::", $callback);
-        $controller_instance = new $controller();
-        call_user_func_array([$controller_instance, $method], $params);
+     
+           $this->renderView("dashboard");
+           
 
+ 
+           
     }
-
-    /**
-     * @return void
-     */
-    private function showPageNotFound(): void
+    public function list()
     {
-        http_response_code(404);
-        echo <<<HTML
-        <html lang="en">
-            <head>
-                <title>404 Not Found</title>
-            </head>
-            <body>
-                <h1>404 Page Not Found</h1>
-            </body>    
-        </html>
-HTML;
 
+        $users = (new Users())->getAll();
+
+      return $users;
     }
+
+    public function edit($iduser){
+       $user=(new Users)->getOneById($iduser);
+       $args=[];
+       if ($user->getLoginUser()!=$_POST["loginuser"]){
+           $args["loginuser"]=$_POST["loginuser"];
+       }
+       if ($user->getLoginUser()!=$_POST["passuser"]){
+        $args["passuser"]=$_POST["passuser"];
+    }
+    if ($user->getLoginUser()!=$_POST["role"]){
+        $args["role"]=$_POST["role"];
+    }
+    $user->edit($args);
+    $this->redirectToRoute("dashboard");
+    }
+    
 }
+

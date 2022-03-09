@@ -29,7 +29,7 @@ $router->register('/dashboard', '\App\controller\UsersController::afficherDashbo
 $router->register('/contact', '\App\controller\UsersController::afficherTest');
 $router->register('/dahsboard/add-client', '\App\controller\ClientsController::addClient');
 $router->register('/dahsboard/list-client', '\App\controller\ClientsController::list');
-$router->register('/dahsboard/delete-client', '\App\controller\ClientsController::deleteClient');
+$router->register('/dahsboard/user/edit/#iduser', '\App\controller\UsersController::edit');
 $router->run();
 
 
