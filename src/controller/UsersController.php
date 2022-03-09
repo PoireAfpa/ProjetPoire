@@ -96,5 +96,10 @@ class UsersController extends Controller{
     $this->redirectToRoute("dashboard");
     }
     
+    public function deleteUser($iduser) 
+    {   
+        $user = (new Users())->delete($iduser);
+        $this->renderView("dashboard");
+    }
 }
 

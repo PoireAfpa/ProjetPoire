@@ -44,6 +44,47 @@ class ClientsController extends Controller
     public function deleteClient($idclient) 
     {   
         $client = (new Clients())->delete($idclient);
-        $this->renderView("client/list");
+        $this->renderView("dashboard");
     }
+
+
+    public function editClient($idclient){
+        $client=(new Clients)->getOneById($idclient);
+        $args=[];
+        if ($client->getIdsect()!=$_POST["idsect"]){
+            $args["idsect"]=$_POST["idsect"];
+        }
+        if ($client->getRaisonsocial()!=$_POST["raisonsocial"]){
+         $args["raisonsocial"]=$_POST["raisonsocial"];
+     }
+     if ($client->getCa()!=$_POST["ca"]){
+         $args["ca"]=$_POST["ca"];
+     }
+     if ($client->getAdresseclient()!=$_POST["adressseclient"]){
+        $args["adressseclient"]=$_POST["adressseclient"];
+    }
+    if ($client->getCodepostal()!=$_POST["codepostal"]){
+        $args["codepostal"]=$_POST["codepostal"];
+    }
+    if ($client->getVilleclient()!=$_POST["villeclient"]){
+        $args["villeclient"]=$_POST["villeclient"];
+    }
+    if ($client->getEffectif()!=$_POST["effectif"]){
+        $args["effectif"]=$_POST["effectif"];
+    }
+    if ($client->getTelephoneclient()!=$_POST["telephoneclient"]){
+        $args["telephoneclient"]=$_POST["telephoneclient"];
+    }
+    if ($client->getTypeclient()!=$_POST["typeclient"]){
+        $args["typeclient"]=$_POST["typeclient"];
+    }
+    if ($client->getNatureclient()!=$_POST["natureclient"]){
+        $args["natureclient"]=$_POST["natureclient"];
+    }
+    if ($client->getCommentaireclient()!=$_POST["commentaireclient"]){
+        $args["commentaireclient"]=$_POST["commentaireclient"];
+    }
+     $client->edit($args);
+     $this->redirectToRoute("dashboard");
+     }
 }

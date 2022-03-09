@@ -120,5 +120,9 @@ private $role;
 
    }
 
+   public function delete($iduser) 
+   {
+       Dao::delete(self::class, ['iduser' => $iduser]);
+   }
 
 }

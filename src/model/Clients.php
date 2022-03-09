@@ -283,4 +283,10 @@ class Clients extends Model
     {
         Dao::delete(self::class, ['idclient' => $idclient]);
     }
+
+    public function edit($args){
+        Dao::edit(self::class,  $args, [
+            "idclient"=>$this->idclient
+        ]);
+       }
 }
