@@ -23,7 +23,7 @@ class ClientsController extends Controller
         {
             $client = new Clients();
             $client->setIdsect($_POST['idsect']);
-            $client->setRaisonsocial($_POST['raisonsocial']);
+            $client->setRaisonsociale($_POST['raisonsociale']);
             $client->setCa($_POST['ca']);
             $client->setAdresseclient($_POST['adresseclient']);
             $client->setCodepostal($_POST['codepostal']);
@@ -54,8 +54,8 @@ class ClientsController extends Controller
         if ($client->getIdsect()!=$_POST["idsect"]){
             $args["idsect"]=$_POST["idsect"];
         }
-        if ($client->getRaisonsocial()!=$_POST["raisonsocial"]){
-         $args["raisonsocial"]=$_POST["raisonsocial"];
+        if ($client->getRaisonsociale()!=$_POST["raisonsociale"]){
+         $args["raisonsociale"]=$_POST["raisonsociale"];
      }
      if ($client->getCa()!=$_POST["ca"]){
          $args["ca"]=$_POST["ca"];
