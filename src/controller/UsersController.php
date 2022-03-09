@@ -86,10 +86,10 @@ class UsersController extends Controller{
        if ($user->getLoginUser()!=$_POST["loginuser"]){
            $args["loginuser"]=$_POST["loginuser"];
        }
-       if ($user->getLoginUser()!=$_POST["passuser"]){
+       if ($user->getPassUser()!=$_POST["passuser"]){
         $args["passuser"]=$_POST["passuser"];
     }
-    if ($user->getLoginUser()!=$_POST["role"]){
+    if ($user->getRole()!=$_POST["role"]){
         $args["role"]=$_POST["role"];
     }
     $user->edit($args);
