@@ -3,7 +3,7 @@
 namespace App\controller;
 
 use App\core\Controller;
-use App\src\model\Contacts;
+use App\model\Contacts;
 
 class ContactsController extends Controller{
 

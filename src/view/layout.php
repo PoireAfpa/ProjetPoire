@@ -37,14 +37,14 @@
                 <li class="nav-item">
                     <a class="nav-link <?php if ("/" . ($_SERVER['QUERY_STRING']) == "/home") {
                         echo " active";
-                    } ?>" href='http://localhost'.BASE_URI.'/home'>Home</a>
+                    } ?>" href='http://localhost".BASE_URI."/home'>Home</a>
                 </li>
 
 
                 <li class="nav-item">
                     <a class="nav-link<?php if ("/" . ($_SERVER['QUERY_STRING']) == "/dashboard") {
                         echo " active";
-                    } ?>" href='http://localhost'.BASE_URI.'/dashboard'>Dashboard</a>
+                    } ?>" href='http://localhost".BASE_URI."/dashboard'>Dashboard</a>
                 </li>
                 <?php if (session_status() == PHP_SESSION_ACTIVE) {
                     echo '  <li class="nav-item">

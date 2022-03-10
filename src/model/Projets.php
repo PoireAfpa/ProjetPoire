@@ -5,21 +5,21 @@ namespace App\model;
 use App\core\Dao;
 use App\core\Model;
 
-class Projets extends Model
+class projets extends Model
 {
 
 // déclarer les propriétés
-private $codeProjet;
-private $abregeProjet;
-private $nomProjet;
-private $typeProjet;
+private $codeprojet;
+private $abregeprojet;
+private $nomprojet;
+private $typeprojet;
 
 /**
      * @return mixed
      */
     public function getCodeProjet()
     {
-        return $this->codeProjet;
+        return $this->codeprojet;
     }
 
     /**
@@ -27,15 +27,15 @@ private $typeProjet;
      */
     public function getAbregeProjet()
     {
-        return $this->abregeProjet;
+        return $this->abregeprojet;
     }
 
     /**
-     * @param mixed $abregeProjet
+     * @param mixed $abregeprojet
      */
-    public function setAbregeProjet($abregeProjet): void
+    public function setAbregeProjet($abregeprojet): void
     {
-        $this->abregeProjet = $abregeProjet;
+        $this->abregeprojet = $abregeprojet;
     }
 
     /**
@@ -43,15 +43,15 @@ private $typeProjet;
      */
     public function getNomProjet()
     {
-        return $this->nomProjet;
+        return $this->nomprojet;
     }
 
     /**
-     * @param mixed $nomProjet
+     * @param mixed $nomprojet
      */
-    public function setNomProjet($nomProjet): void
+    public function setNomProjet($nomprojet): void
     {
-        $this->nomProjet = $nomProjet;
+        $this->nomprojet = $nomprojet;
     }
 
     /**
@@ -59,15 +59,15 @@ private $typeProjet;
      */
     public function getTypeProjet()
     {
-        return $this->typeProjet;
+        return $this->typeprojet;
     }
 
     /**
-     * @param mixed $typeProjet
+     * @param mixed $typeprojet
      */
-    public function setTypeProjet($typeProjet): void
+    public function setTypeProjet($typeprojet): void
     {
-        $this->typeProjet = $typeProjet;
+        $this->typeprojet = $typeprojet;
     }
 
     public function getAll()
@@ -76,11 +76,11 @@ private $typeProjet;
         return $projets;
     }
 
-    public function getOneById(int $codeProjet) : ?Projets
+    public function getOneById(int $codeprojet) : ?projets
     {
         $projet = Dao::getOne(self::class,
             [
-                'codeProjet' => $codeProjet
+                'codeprojet' => $codeprojet
             ]);
         if ($projet == false)
         {

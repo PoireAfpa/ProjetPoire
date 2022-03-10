@@ -55,68 +55,7 @@ use App\model\Contacts;
           }
 ?>
 
-<!-- Modal edit collaborateur-->
 
-
-<script> 
-$(document).ready(function() {
-   $("#modalEdit").modal( {
-        keyboard: true,
-        backdrop: "static",
-        show: false,
-
-    }).on('show', function () {
-
-    });
-    $(".test").find('td[id]').on('click', function () {
-        debugger;
-
-        $('#modalEdit').html($('<b> Order Id selected: ' + $(this).data('id') + '</b>'));
-        $('#modalEdit').modal('show');
-
-  })});
-
-</script>
-
-
-<div class="modal fade" id="modalEdit" tabindex="-1" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalEditLabel">Modifier un collaborateur</h5>
-
-      </div>
-      <div class="modal-body">
-      <input type='text' id="login" value="" class='form-control' placeholder='Login user' name='loginuser'>
-      <input type='text' class='form-control' placeholder='Pass user' name='passuser'>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Modifier</button>
-        <button  type="submit" name="docClb" class="btn btn btn-success">Ajouter doc</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal delete collaborateur-->
-<div class="modal fade" id="modalDel" tabindex="-1" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalDelLabel">Supprimer un collaborateur</h5>
-
-      </div>
-      <div class="modal-body">
-     
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Supprimer</button>
-      </div>
-    </div>
-  </div>
-</div>
 <!-----------------------------------------------------------RESPONSABLE DEVELOPPEMENT---------------------------------------------------------->
 <!-- Modal add projet-->
 <div class="modal fade" id="modalAddPjt" tabindex="-1" >
@@ -153,69 +92,9 @@ $(document).ready(function() {
           }
 ?>
 
-<!-- Modal edit projet-->
 
 
-<script> 
-$(document).ready(function() {
-   $("#modalEditPjt").modal( {
-        keyboard: true,
-        backdrop: "static",
-        show: false,
 
-    }).on('show', function () {
-
-    });
-    $(".test").find('td[id]').on('click', function () {
-        debugger;
-
-        $('#modalEditPjt').html($('<b> Order Id selected: ' + $(this).data('id') + '</b>'));
-        $('#modalEditPjt').modal('show');
-
-  })});
-
-</script>
-
-
-<div class="modal fade" id="modalEditPjt" tabindex="-1" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalEditLabel">Modifier un projet</h5>
-
-      </div>
-      <div class="modal-body">
-      <input type='text' id="abregeprojet" value="" class='form-control' placeholder='Abrege projet' name='abregeprojet'>
-      <input type='text' class='form-control' placeholder='Nom projet' name='nomprojet'>
-      <input type='text' class='form-control' placeholder='Type projet' name='typeprojet'>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Modifier</button>
-        <button  type="submit" name="docPjt" class="btn btn btn-success">Ajouter doc</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal delete projet-->
-<div class="modal fade" id="modalDelPjt" tabindex="-1" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalDelLabel">Supprimer un projet</h5>
-
-      </div>
-      <div class="modal-body">
-     
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Supprimer</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-----------------------------------------------------------COMMERCIAUX---------------------------------------------------------->
 <!-----------------------------------------------------------CLIENTS---------------------------------------------------------->
@@ -271,25 +150,6 @@ $(document).ready(function() {
 <!-- Modal edit client-->
 
 
-<script> 
-$(document).ready(function() {
-   $("#modalEditClt").modal( {
-        keyboard: true,
-        backdrop: "static",
-        show: false,
-
-    }).on('show', function () {
-
-    });
-    $(".test").find('td[id]').on('click', function () {
-        debugger;
-
-        $('#modalEditClt').html($('<b> Order Id selected: ' + $(this).data('id') + '</b>'));
-        $('#modalEditClt').modal('show');
-
-  })});
-
-</script>
 
 
 <div class="modal fade" id="modalEditClt" tabindex="-1" >
