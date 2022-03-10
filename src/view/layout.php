@@ -6,17 +6,22 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    
+  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"defer></script>
 
+    
 
     <!-- CSS & JS links for geolocation map-->
     <link rel="stylesheet" type="text/css"
           href="<?= $_SERVER["REQUEST_SCHEME"] . '://' . $_SERVER["HTTP_HOST"] . BASE_URI ?>/public/css/stylemap.css"/>
     <script src="<?= $_SERVER["REQUEST_SCHEME"] . '://' . $_SERVER["HTTP_HOST"] . BASE_URI ?>/public/js/indexmap.js"
             defer></script>
+  
+            <!-- CSS Gen  -->
+<link rel="stylesheet" type="text/css"
+          href="<?= $_SERVER["REQUEST_SCHEME"] . '://' . $_SERVER["HTTP_HOST"] . BASE_URI ?>/public/css/style.css"/>
 
 
 
@@ -26,8 +31,8 @@
 <body>
 
 <header>
-    <nav class="navbar  navbar-expand-lg sticky-top navbar-light bg-light ">
-        <a class="navbar-brand" href="">ABI</a>
+    <nav class="navbar  navbar-expand-lg fixed-top navbar-light bg-light ">
+    <a href="http://localhost/projetPoire/home" class="navbar-left"><img src="http://localhost/projetPoire/public/img/Poire.png" style="height:40px;"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,14 +42,14 @@
                 <li class="nav-item">
                     <a class="nav-link <?php if ("/" . ($_SERVER['QUERY_STRING']) == "/home") {
                         echo " active";
-                    } ?>" href="http://localhost/projetPoire/home">Home</a>
+                    } ?>" href="http://localhost<?=BASE_URI?>/home"?>Home</a>
                 </li>
 
 
                 <li class="nav-item">
                     <a class="nav-link<?php if ("/" . ($_SERVER['QUERY_STRING']) == "/dashboard") {
                         echo " active";
-                    } ?>" href='http://localhost/projetPoire/dashboard'>Dashboard</a>
+                    } ?>" href="http://localhost<?=BASE_URI?>/dashboard"?>Dashboard</a>
                 </li>
                 <?php if (session_status() == PHP_SESSION_ACTIVE) {
                     echo '  <li class="nav-item">
@@ -77,12 +82,16 @@
 <?= $content ?>
 
 
-<!--<footer class="bg-light text-center fixed-bottom text-lg-start">
+<footer class="bg-light text-center fixed-bottom text-lg-start">
     <div class="container">
         <div class="row">
-            <div class="col">
-                <h4 class="fs-5 text p-1">Adresse</h4>
+            
+            <div class="col"  colspan="4">
+            <a href="poire." class="img" ><img src="http://localhost/projetPoire/public/img/ABILogo.png" style="height:190px;"></a>   
+            </div>
 
+            <div class="col"  colspan="4">
+                <h4 class="fs-5 text p-1">Adresse</h4>
                 <div class="place">
                     <span class="fas fa-map-marker-alt"></span>
                     <span class="text">3 Allée de la Grande Egalonne</span>
@@ -96,19 +105,18 @@
                     <span class="fas fa-envelope"></span>
                     <span class="text">poire.afpa@gmail.com</span>
                 </div>
-            </div>
-            <div class="col">
-                <h4 class="text-center fs-5 text p-1">A propos de nous</h4>
-                <div class="text-center fs-6 text p-1">Lorem idivsum dolor sit amet consectetur adipisicing elit.
-                    Corrupti exercitationem cum dolores soluta
-                    repudiandae corporis asperiores, tenetur repellendus dolore quibusdam quam vitae illo amet?
+                <div class="text">
+                    <span class="fas fa-envelope"></span>
+                    <a class="nav-link <?php if ("/" . ($_SERVER['QUERY_STRING']) == "/contact") {
+                        echo " active";
+                    } ?>" style="color:#000000;" href='http://localhost/projetPoire/contact'>Contact</a>
                 </div>
-            </div>-->
+            </div>
 
             <!-- Geolocation map-->
-            <div class="col text-end ">
+            <div class="col text-end" colspan="4">
 
-               <!-- <div id="map"></div>-->
+                <div id="map" style="height:100%"></div>
             </div>
 
         </div>

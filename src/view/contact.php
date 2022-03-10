@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
 
-    <link href="stylemail.css" rel="stylesheet" type="text/css">
-
-    <title>Contact</title>
 
   
 
+    <title>Contact</title>
+
+ 
+
+
 </head>
-<body>
+<main>
+    
     <h4 class="sent-notification"></h4>
 <form id="myForm">
-<h1> Contact </h1>
+<h1 id="titreMail"> Contact </h1>
 
-<p>Pour toute demande, remplissez le formulaire ci-dessous.</p>
+<h2 id="titreDemande">Pour toute demande, remplissez le formulaire ci-dessous.</h2>
 
 
 
@@ -85,5 +88,5 @@ function isNotEmpty(caller){
 
 </script>
 
-</body>
+</main>
 </html>
