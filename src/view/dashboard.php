@@ -78,8 +78,9 @@ if ( session_status() == PHP_SESSION_ACTIVE){
                              <h5 class="modal-title" id="modalDelLabel">Supprimer un collaborateur</h5>
                      
                            </div>
-                           <form action="'.BASE_URI.'/dahsboard/user/delete/'.$collaborateur->getIdUser().'" method="post">
                            <div class="modal-body">
+                           <form action="'.BASE_URI.'/dahsboard/user/delete/'.$collaborateur->getIdUser().'" method="post">
+                         
                           <div> Etes vous sûr de vouloir supprimer'.$collaborateur->getLoginUser().'?
                            </div>
                            <div class="modal-footer">
@@ -89,6 +90,7 @@ if ( session_status() == PHP_SESSION_ACTIVE){
                            </form>
                          </div>
                        </div>
+                       </div>
                      </div>';
                        // Modal add doc collaborateur//
                        $modalDoc.='
@@ -97,21 +99,21 @@ if ( session_status() == PHP_SESSION_ACTIVE){
                            <div class="modal-content">
                              <div class="modal-header">
                                <h5 class="modal-title" id="modalDocLabel">Ajouter un document</h5>
-                       
-                             </div>
-                             <form action="'.BASE_URI.'/dahsboard/user/addDoc/'.$collaborateur->getIdUser().'" method="post" enctype="multipart/form-data>
-                             <div class="modal-body">
-                              <div class="input-group">
-                             <div class="custom-file">
-                               <input type="file" class="custom-file-input" name="mon_fichier" id="addDoc">
-                               <label class="custom-file-label" for="addDoc">Choisissez un document</label>
-                             </div>
-                             </div>
-                             <div class="modal-footer">
-                               <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-                               <button type="submit" name="addFile" class="btn btn-primary">Ajouter</button>
-                             </div>
-                             </form>
+                              </div>
+                                    <form action="'.BASE_URI.'/dahsboard/user/addDoc/'.$collaborateur->getIdUser().'" method="post" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                          <div class="input-group">
+                                                  <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" name="mon_fichier" id="addDoc">
+                                                    <label class="custom-file-label" for="addDoc">Choisissez un document</label></div>
+                                          </div>
+                                        </div>
+                                              <div class="modal-footer">
+                                              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+                                              <button type="submit" name="addDoc" class="btn btn-primary">Ajouter</button>
+                                              </div>
+                                    </form>
+                                    
                            </div>
                          </div>
                        </div>';
@@ -122,11 +124,6 @@ if ( session_status() == PHP_SESSION_ACTIVE){
                   echo $modalEdit;
                   echo $modalDelete;
                   echo $modalDoc;
-                  if(isset($_POST["addFile"])) {
-                    $target_dir = "files/";
-                    $target_file = $target_dir . basename($_FILES["mon_fichier"]["name"]);
-                    move_uploaded_file($_FILES["mon_fichier"]["tmp_name"], $target_file);
-                }
                   if (isset($_POST['closeList'])){
                         $html="";
                       echo $html;
@@ -142,9 +139,9 @@ if ( session_status() == PHP_SESSION_ACTIVE){
 
         if($_SESSION["role"]=="Secrétaire Technique"){
                   require_once __DIR__ . '/user/modals.php';
-                  echo '<form method="post"><div class="container-fluid"><div class="justify-content-center"><div class="btn-group col ">';
+                  echo '<form method="post"><div class="container-fluid"><div class="justify-content-center">';
                   echo '<div class="col-6"><input type="submit" value=" Afficher tous collaborateurs" class="btn btn-primary btn-lg btn-block" name="viewClb"> </div>';
-                  echo'</div></div></div></form>';
+                  echo'</div></div></form>';
               
                if (isset($_POST['viewClb'])){
                    $collaborateurs= ((new Users)->getAll());
@@ -156,6 +153,7 @@ if ( session_status() == PHP_SESSION_ACTIVE){
                    <th><form method="post" ><input  type="submit" value="FERMER" name="closeList" class="btn-sm btn btn-primary"/></form></th>';
                    $html.=' </tr> </thead>';
                    $html.=' <tbody>';
+                   $modalEdit="";
                  foreach($collaborateurs as $collaborateur){
 
                     $html.='<tr>';
@@ -163,41 +161,42 @@ if ( session_status() == PHP_SESSION_ACTIVE){
                     $html.='<td class= "text-center align-middle">'.$collaborateur->getLoginUser().'</td>';
                     $html.='<td class= "text-center align-middle">'.$collaborateur->getPassUser().'</td>';
                     $html.='<td class= "text-center align-middle">'.$collaborateur->getRole().'</td>';
-                    $html.=' <td><button  data-id="'.$collaborateur->getIdUser().'" data-login="'.$collaborateur->getLoginUser().'" data-pas="'.$collaborateur->getRole().'" type="submit" name="editClb" data-bs-target="#modalEdit" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>';
+                    $html.=' <td class= "text-center" colspan="2"><button  data-id="'.$collaborateur->getIdUser().'" data-login="'.$collaborateur->getLoginUser().'" data-pas="'.$collaborateur->getRole().'" type="submit" name="editClb" data-bs-target="#modalEdit'.$collaborateur->getIdUser().'" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>';
                        // Modal edit collaborateur//
                        $modalEdit.= '
-                       <div class="modal fade" id="modalEdit'.$collaborateur->getIdUser().'" tabindex="-1" >
-                       <div class="modal-dialog">
-                         <div class="modal-content">
-                           <div class="modal-header">
-                             <h5 class="modal-title" id="modalEditLabel">Modifier un collaborateur</h5>
-                       
-                           </div>
-                           <form action="'.BASE_URI.'/dahsboard/user/edit/'.$collaborateur->getIdUser().'" method="post">
-                           <div class="modal-body">
-                           <input type="text" id="login" value="'.$collaborateur->getLoginUser().'" class="form-control" placeholder="Login user" name="loginuser">
-                           <input type="text" value="'.$collaborateur->getPassUser().'" class="form-control" placeholder="Pass user" name="passuser">
-                           <input type="text" value="'.$collaborateur->getRole().'"class="form-control" placeholder="Pass user" name="role">
-                           </div>
-                           <div class="modal-footer">
-                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                             <button type="submit" class="btn btn-primary">Modifier</button>
-                             <button  type="submit" name="docClb" class="btn btn btn-success">Ajouter doc</button>
-                           </div>
-                           </form>
+                     <div class="modal fade" id="modalEdit'.$collaborateur->getIdUser().'" tabindex="-1" >
+                     <div class="modal-dialog">
+                       <div class="modal-content">
+                         <div class="modal-header">
+                           <h5 class="modal-title" id="modalEditLabel">Modifier un collaborateur</h5>
+                     
                          </div>
+                         <form action="'.BASE_URI.'/dahsboard/user/edit/'.$collaborateur->getIdUser().'" method="post">
+                         <div class="modal-body">
+                         <input type="text" id="login" value="'.$collaborateur->getLoginUser().'" class="form-control" placeholder="Login user" name="loginuser">
+                         <input type="text" value="'.$collaborateur->getPassUser().'" class="form-control" placeholder="Pass user" name="passuser">
+                         <input type="text" value="'.$collaborateur->getRole().'"class="form-control" placeholder="Pass user" name="role">
+                         </div>
+                         <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                           <button type="submit" class="btn btn-primary">Modifier</button>
+                           <button  type="submit" name="docClb" class="btn btn btn-success">Ajouter doc</button>
+                         </div>
+                         </form>
                        </div>
-                       </div>'
-                       ;
+                     </div>
+                     </div>'
+                     ;
                    
                  };
                  $html.='</tr></tbody></table>';
-                 echo $html;
+                echo $html;
+                echo $modalEdit;
                  if (isset($_POST['closeList'])){
                   
                      $html="";
                      echo $html;
-                     echo $modalEdit;
+                  
 
                  }
 
@@ -264,10 +263,28 @@ if ( session_status() == PHP_SESSION_ACTIVE){
              </div>
            </div>
          </div>';
-    }};
+    }
+  
+    $html.='</tr></tbody></table>';
+    echo $html;
+    echo $modalEdit;
+    echo $modalDelete;
+    echo $modalDoc;
+    if (isset($_POST['closeList'])){
+      
+        $html="";
+        echo $html;
+ 
+    }
+   };
+  
+  
+  
+  
+ 
      if (isset($_POST['viewPjt'])){
   
-     $projects= ((new Projets)->getAll());
+     $projets= ((new Projets)->getAll());
      $html=' <table class="table table-striped  table-dark"> <thead class="thead-light">';
      $html.='  <tr> <th class= "text-center " scope="col">CODE PROJET</th> 
      <th class= "text-center " scope="col">ABREGE PROGE</th>
@@ -278,29 +295,31 @@ if ( session_status() == PHP_SESSION_ACTIVE){
      $html.=' </tr> </thead>';
      $html.=' <tbody>';
      $modalEdit="";
-   foreach($projects as $project){
+     $modalDelete="";
+     $modalDoc="";
+   foreach($projets as $projet){
 
       $html.='<tr>';
-      $html.='<td class= "text-center align-middle">'.$project->getCodeProjet().'</td>';
-      $html.='<td class= "text-center align-middle">'.$project->getAbregeProjet().'</td>';
-      $html.='<td class= "text-center align-middle">'.$project->getNomProjet().'</td>';
-      $html.='<td class= "text-center align-middle">'.$project->getTypeProjet().'</td>';
-      $html.=' <td><button type="submit" name="editPjt" data-bs-target="#modalEditPjt'.$project->getCodeProjet().'" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
+      $html.='<td class= "text-center align-middle">'.$projet->getCodeProjet().'</td>';
+      $html.='<td class= "text-center align-middle">'.$projet->getAbregeProjet().'</td>';
+      $html.='<td class= "text-center align-middle">'.$projet->getNomProjet().'</td>';
+      $html.='<td class= "text-center align-middle">'.$projet->getTypeProjet().'</td>';
+      $html.=' <td><button type="submit" name="editPjt" data-bs-target="#modalEditPjt'.$projet->getCodeProjet().'" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
       <td><input name="delPjt"  value="Supprimer" type="submit" class="btn-sm btn btn-danger test" data-bs-toggle="modal" data-bs-target="#modalDelPjt"/></a></td>';
        // Modal edit projet//
       $modalEdit.= '
-      <div class="modal fade" id="modalEditPjt'.$project->getCodeProjet().'" tabindex="-1" >
+      <div class="modal fade" id="modalEditPjt'.$projet->getCodeProjet().'" tabindex="-1" >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalEditLabel">Modifier un projet</h5>
       
           </div>
-          <form action="'.BASE_URI.'/dahsboard/projet/edit/'.$project->getCodeProjet().'" method="post">
+          <form action="'.BASE_URI.'/dahsboard/projet/edit/'.$projet->getCodeProjet().'" method="post">
          <div class="modal-body">
-          <input type="text" value="'.$project->getAbregeProjet().'" class="form-control" name="abregeprojet">
-          <input type="text" value="'.$project->getNomProjet().'" class="form-control" name="nomprojet">
-          <input type="text" value="'.$project->getTypeProjet().'"class="form-control" name="typeprojet">
+          <input type="text" value="'.$projet->getAbregeProjet().'" class="form-control" name="abregeprojet">
+          <input type="text" value="'.$projet->getNomProjet().'" class="form-control" name="nomprojet">
+          <input type="text" value="'.$projet->getTypeProjet().'"class="form-control" name="typeprojet">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -314,16 +333,16 @@ if ( session_status() == PHP_SESSION_ACTIVE){
       ;
      // Modal delete projet//
      $modalDelete.='
-     <div class="modal fade" id="modalDel'.$project->getCodeProjet().'" tabindex="-1" >
+     <div class="modal fade" id="modalDel'.$projet->getCodeProjet().'" tabindex="-1" >
        <div class="modal-dialog">
          <div class="modal-content">
            <div class="modal-header">
              <h5 class="modal-title" id="modalDelLabel">Supprimer un collaborateur</h5>
      
            </div>
-           <form action="'.BASE_URI.'/dahsboard/projet/delete/'.$project->getNomProjet().'" method="post">
+           <form action="'.BASE_URI.'/dahsboard/projet/delete/'.$projet->getNomProjet().'" method="post">
            <div class="modal-body">
-          <div> Etes vous sûr de vouloir supprimer'.$project->getNomProjet().'?
+          <div> Etes vous sûr de vouloir supprimer'.$projet->getNomProjet().'?
            </div>
            <div class="modal-footer">
              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
@@ -333,7 +352,7 @@ if ( session_status() == PHP_SESSION_ACTIVE){
          </div>
        </div>
      </div>'; 
-  }};
+  };
   
    $html.='</tr></tbody></table>';
    echo $html;
@@ -347,12 +366,13 @@ if ( session_status() == PHP_SESSION_ACTIVE){
 
    }
  
-     };
+     }};
   //-----------------------------------------------------------TECHNICIEN SUPPORT--------------------------------------------------------- 
   if($_SESSION["role"]=="Technicien support"){
     require_once __DIR__ . '/user/modals.php';
     echo '<form method="post"><div class="container-fluid"><div class="justify-content-center"><div class="btn-group col ">';
-   
+    echo ' <div class="col-4"><input type="submit" value=" Afficher tous collaborateurs" class="btn btn-primary btn-lg btn-block" name="viewClb">         
+   </div>';
     echo ' <div class="col-6"><input type="submit" value=" Afficher les projets" class="btn btn-primary btn-lg btn-block" name="viewPjt">
   
    </div>';
@@ -369,6 +389,9 @@ if ( session_status() == PHP_SESSION_ACTIVE){
      <th><form method="post" ><input  type="submit" value="FERMER" name="closeList" class="btn-sm btn btn-primary"/></form></th>';
      $html.=' </tr> </thead>';
      $html.=' <tbody>';
+     $modalEdit="";
+     $modalDelete="";
+     $modalDoc="";
    foreach($projets as $projet){
 
       $html.='<tr>';
@@ -376,21 +399,21 @@ if ( session_status() == PHP_SESSION_ACTIVE){
       $html.='<td class= "text-center align-middle">'.$projet->getAbregeProjet().'</td>';
       $html.='<td class= "text-center align-middle">'.$projet->getNomProjet().'</td>';
       $html.='<td class= "text-center align-middle">'.$projet->getTypeProjet().'</td>';
-      $html.=' <td><button  data-id="'.$projet->getCodeProjet().'" data-login="'.$projet->getNomProjet().'" type="submit" name="editPjt" data-bs-target="#modalEditPjt" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>';
+      $html.=' <td><button  data-id="'.$projet->getCodeProjet().'" data-login="'.$projet->getNomProjet().'" type="submit" name="editPjt" data-bs-target="#modalEditPjt'.$projet->getCodeProjet().'" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>';
         // Modal edit projet//
         $modalEdit.= '
-        <div class="modal fade" id="modalEditPjt'.$project->getCodeProjet().'" tabindex="-1" >
+        <div class="modal fade" id="modalEditPjt'.$projet->getCodeProjet().'" tabindex="-1" >
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="modalEditLabel">Modifier un projet</h5>
         
             </div>
-            <form action="'.BASE_URI.'/dahsboard/projet/edit/'.$project->getCodeProjet().'" method="post">
+            <form action="'.BASE_URI.'/dahsboard/projet/edit/'.$projet->getCodeProjet().'" method="post">
            <div class="modal-body">
-            <input type="text" value="'.$project->getAbregeProjet().'" class="form-control" name="abregeprojet">
-            <input type="text" value="'.$project->getNomProjet().'" class="form-control" name="nomprojet">
-            <input type="text" value="'.$project->getTypeProjet().'"class="form-control" name="typeprojet">
+            <input type="text" value="'.$projet->getAbregeProjet().'" class="form-control" name="abregeprojet">
+            <input type="text" value="'.$projet->getNomProjet().'" class="form-control" name="nomprojet">
+            <input type="text" value="'.$projet->getTypeProjet().'"class="form-control" name="typeprojet">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -400,30 +423,21 @@ if ( session_status() == PHP_SESSION_ACTIVE){
             </form>
           </div>
         </div>
-        </div>'
-        ;
-       // Modal delete projet//
-       $modalDelete.='
-       <div class="modal fade" id="modalDel'.$project->getCodeProjet().'" tabindex="-1" >
-         <div class="modal-dialog">
-           <div class="modal-content">
-             <div class="modal-header">
-               <h5 class="modal-title" id="modalDelLabel">Supprimer un collaborateur</h5>
-       
-             </div>
-             <form action="'.BASE_URI.'/dahsboard/projet/delete/'.$project->getNomProjet().'" method="post">
-             <div class="modal-body">
-            <div> Etes vous sûr de vouloir supprimer'.$project->getNomProjet().'?
-             </div>
-             <div class="modal-footer">
-               <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-               <button type="submit" class="btn btn-danger">Supprimer</button>
-             </div>
-             </form>
-           </div>
-         </div>
-       </div>'; 
-   };
+        </div>';
+   }
+   $html.='</tr></tbody></table>';
+   echo $html;
+   echo $modalEdit;
+   echo $modalDelete;
+   echo $modalDoc;
+   if (isset($_POST['closeList'])){
+     
+       $html="";
+       echo $html;
+
+   }
+  };
+     
    if (isset($_POST['viewClb'])){
     $collaborateurs= ((new Users)->getAll());
     $html=' <table class="table table-striped  table-dark"> <thead class="thead-light">';
@@ -471,7 +485,7 @@ if ( session_status() == PHP_SESSION_ACTIVE){
              </div>
            </div>
          </div>';
-    }};
+    };
    $html.='</tr></tbody></table>';
    echo $html;
    echo $modalEdit;
@@ -505,8 +519,9 @@ if ( session_status() == PHP_SESSION_ACTIVE){
  echo'</div></div></div></form>';
 
 if (isset($_POST['viewClt'])){
-   $clients= ((new Clients)->getAll());
-   $html=' <table class="table table-striped  table-dark"> <thead class="thead-light">';
+   $customers= ((new Clients)->getAll());
+   $html=' <table class="table table-striped  table-dark">
+   <thead class="thead-light">';
    $html.='  <tr> <th class= "text-center " scope="col">ID</th> 
    <th class= "text-center " scope="col">RAISON SOCIALE</th>
    <th class= "text-center " scope="col">ADRESSE</th>
@@ -524,33 +539,34 @@ if (isset($_POST['viewClt'])){
    $html.=' <tbody>';
    $modalEdit="";
    $modalDoc="";
- foreach($clients as $client){
+   $modalDelete="";
+ foreach($customers as $customer){
 
     $html.='<tr>';
-    $html.='<td class= "text-center align-middle">'.$client->getIdclient().'</td>';
-    $html.='<td class= "text-center align-middle">'.$client->getRaisonsociale().'</td>';
-    $html.='<td class= "text-center align-middle">'.$client->getAdresseclient().'</td>';
-    $html.='<td class= "text-center align-middle">'.$client->getCodepostal().'</td>';
-    $html.='<td class= "text-center align-middle">'.$client->getVilleclient().'</td>';
-    $html.='<td class= "text-center align-middle">'.$client->getCa().'</td>';
-    $html.='<td class= "text-center align-middle">'.$client->getEffectif().'</td>';
-    $html.='<td class= "text-center align-middle">'.$client->getTelephoneclient().'</td>';
-    $html.='<td class= "text-center align-middle">'.$client->getTypeclient().'</td>';
-    $html.='<td class= "text-center align-middle">'.$client->getNatureclient().'</td>';
-    $html.='<td class= "text-center align-middle">'.$client->getCommentaireclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$customer->getIdclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$customer->getRaisonsociale().'</td>';
+    $html.='<td class= "text-center align-middle">'.$customer->getAdresseclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$customer->getCodepostal().'</td>';
+    $html.='<td class= "text-center align-middle">'.$customer->getVilleclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$customer->getCa().'</td>';
+    $html.='<td class= "text-center align-middle">'.$customer->getEffectif().'</td>';
+    $html.='<td class= "text-center align-middle">'.$customer->getTelephoneclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$customer->getTypeclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$customer->getNatureclient().'</td>';
+    $html.='<td class= "text-center align-middle">'.$customer->getCommentaireclient().'</td>';
     $html.=' <td><button type="submit" name="editClt" data-bs-target="#modalEditClt" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
     <td><input name="delClt"  value="Supprimer" type="submit" class="btn-sm btn btn-danger test" data-bs-toggle="modal" data-bs-target="#modalDelClt"/></a></td>';
-    $html.='<td><input name="docClt"  value="Add document" type="submit" class="btn-sm btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDoc'.$client->getIdclient().'"/></a></td>';
-     // Modal add doc client//
+    $html.='<td><input name="docClt"  value="Add document" type="submit" class="btn-sm btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDoc'.$customer->getIdclient().'"/></a></td>';
+    /* // Modal add doc client//
      $modalDoc.='
-     <div class="modal fade" id="modalDoc'.$client->getIdclient().'" tabindex="-1" >
+     <div class="modal fade" id="modalDoc'.$customer->getIdclient().'" tabindex="-1" >
        <div class="modal-dialog">
          <div class="modal-content">
            <div class="modal-header">
              <h5 class="modal-title" id="modalDocLabel">Ajouter un document</h5>
      
            </div>
-           <form action="'.BASE_URI.'/dahsboard/client/addDoc/'.$client->getIdclient().'" method="post" enctype="multipart/form-data>
+           <form action="'.BASE_URI.'/dahsboard/client/addDoc/'.$customer->getIdclient().'" method="post" enctype="multipart/form-data>
            <div class="modal-body">
             <div class="input-group">
            <div class="custom-file">
@@ -567,26 +583,26 @@ if (isset($_POST['viewClt'])){
        </div>
      </div>';
       /* Modal edit client*/
-    $modalEdit='
-   <div class="modal fade" id="modalEditClt"'.$client->getIdclient().' tabindex="-1" >
+   /* $modalEdit.='
+   <div class="modal fade" id="modalEditClt"'.$customer->getIdclient().' tabindex="-1" >
      <div class="modal-dialog">
        <div class="modal-content">
          <div class="modal-header">
            <h5 class="modal-title" id="modalEditLabel">Modifier un client</h5>
    
          </div>
-         <form action="'.BASE_URI.'/dahsboard/client/edit/'.$client->getIdclient().'" method="post">
+         <form action="'.BASE_URI.'/dahsboard/client/edit/'.$customer->getIdclient().'" method="post">
          <div class="modal-body">
-         <input type="text" class="form-control" value="'.$client->getRaisonsociale().'" placeholder="Raison sociale" name="raisonsociale">
-             <input type="text" class="form-control" value="'.$client->getAdresseclient().'"  placeholder="Adresse client" name="adresseclient">
-             <input type="text" class="form-control" value="'.$client->getCodepostal().'"  placeholder="Code postal" name="codepostal">
-             <input type="text" class="form-control" value="'.$client->getVilleclient().'"  placeholder="Ville" name="ville">
-             <input type="text" class="form-control" value="'.$client->getCa().'"  placeholder="Chiffre d\"affaires" name="ca">
-             <input type="text" class="form-control" value="'.$client->getEffectif().'"  placeholder="Effectif" name="effectif">
-             <input type="text" class="form-control" value="'.$client->getTelephoneclient().'" placeholder="Téléphone" name="telephone">
-             <input type="text" class="form-control" value="'.$client->getTypeclient().'" placeholder="Type client" name="typeclient">
-             <input type="text" class="form-control" value="'.$client->getNatureclient().'" placeholder="Nature client" name="natureclient">
-             <input type="text" class="form-control" value="'.$client->getCommentaireclient().'" placeholder="Commentaires client" name="commentaireclient">
+         <input type="text" class="form-control" value="'.$customer->getRaisonsociale().'" placeholder="Raison sociale" name="raisonsociale">
+             <input type="text" class="form-control" value="'.$customer->getAdresseclient().'"  placeholder="Adresse client" name="adresseclient">
+             <input type="text" class="form-control" value="'.$customer->getCodepostal().'"  placeholder="Code postal" name="codepostal">
+             <input type="text" class="form-control" value="'.$customer->getVilleclient().'"  placeholder="Ville" name="ville">
+             <input type="text" class="form-control" value="'.$customer->getCa().'"  placeholder="Chiffre d\"affaires" name="ca">
+             <input type="text" class="form-control" value="'.$customer->getEffectif().'"  placeholder="Effectif" name="effectif">
+             <input type="text" class="form-control" value="'.$customer->getTelephoneclient().'" placeholder="Téléphone" name="telephone">
+             <input type="text" class="form-control" value="'.$customer->getTypeclient().'" placeholder="Type client" name="typeclient">
+             <input type="text" class="form-control" value="'.$customer->getNatureclient().'" placeholder="Nature client" name="natureclient">
+             <input type="text" class="form-control" value="'.$customer->getCommentaireclient().'" placeholder="Commentaires client" name="commentaireclient">
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -598,17 +614,17 @@ if (isset($_POST['viewClt'])){
      </div>
    </div>';
     /* Modal delete client*/
-   $modalDelete.='
-   <div class="modal fade" id="modalDel'.$client->getIdclient().'" tabindex="-1" >
+  /* $modalDelete.='
+   <div class="modal fade" id="modalDel'.$customer->getIdclient().'" tabindex="-1" >
      <div class="modal-dialog">
        <div class="modal-content">
          <div class="modal-header">
            <h5 class="modal-title" id="modalDelLabel">Supprimer un collaborateur</h5>
    
          </div>
-         <form action="'.BASE_URI.'/dahsboard/client/delete/'.$client->getIdclient().'" method="post">
+         <form action="'.BASE_URI.'/dahsboard/client/delete/'.$customer->getIdclient().'" method="post">
          <div class="modal-body">
-        <div> Etes vous sûr de vouloir supprimer'.$client->getRaisonsociale().'?
+        <div> Etes vous sûr de vouloir supprimer'.$customer->getRaisonsociale().'?
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
@@ -617,7 +633,8 @@ if (isset($_POST['viewClt'])){
          </form>
        </div>
      </div>
-   </div>';
+   </div>';*/
+ };
    $html.='</tr></tbody></table>';
    echo $html;
    echo $modalEdit;
@@ -644,6 +661,9 @@ if (isset($_POST['viewClt'])){
   <th><form method="post" ><input  type="submit" value="FERMER" name="closeList" class="btn-sm btn btn-primary"/></form></th>';
   $html.=' </tr> </thead>';
   $html.=' <tbody>';
+  $modalDelete="";
+  $modalDoc="";
+  $modalEdit="";
 foreach($contacts as $contact){
 
    $html.='<tr>';
@@ -704,7 +724,7 @@ foreach($contacts as $contact){
        </div>
      </div>
    </div>';
-};
+}
  $html.='</tr></tbody></table>';
  echo $html;
  echo $modalEdit;
@@ -714,10 +734,10 @@ foreach($contacts as $contact){
      $html="";
      echo $html;
 
- }
- }
-   }
-  }; 
+ };
+ };
+   
+  };
 
 }; 
 
@@ -725,17 +745,3 @@ foreach($contacts as $contact){
 ?>
       
  </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

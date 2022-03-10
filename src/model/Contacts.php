@@ -13,13 +13,13 @@ use App\core\Model;
  * @author Poire Afpa <poire.afpa@gmail.com>
  */
 class Contacts extends Model{
-    private $idContact;
-    private $idClient;
-    private $idFonc;
-    private $nomContact;
-    private $prenomContact;
-    private $telContact;
-    private $emailContact;
+    private $idcontact;
+    private $idclient;
+    private $idfonc;
+    private $nomcontact;
+    private $prenomcontact;
+    private $telcontact;
+    private $emailcontact;
     private $photo;
     private $duree;
 
@@ -28,7 +28,7 @@ class Contacts extends Model{
      */
     public function getIdContact()
     {
-        return $this->idContact;
+        return $this->idcontact;
     }
 
     /**
@@ -36,15 +36,15 @@ class Contacts extends Model{
      */
     public function getIdClient()
     {
-        return $this->idClient;
+        return $this->idclient;
     }
 
     /**
-     * @param mixed $idClient
+     * @param mixed $idclient
      */
-    public function setIdClient($idClient): void
+    public function setIdClient($idclient): void
     {
-        $this->idClient = $idClient;
+        $this->idclient = $idclient;
     }
 
     /**
@@ -52,15 +52,15 @@ class Contacts extends Model{
      */
     public function getIdFonc()
     {
-        return $this->idFonc;
+        return $this->idfonc;
     }
 
     /**
-     * @param mixed $idFonc
+     * @param mixed $idfonc
      */
-    public function setIdFonc($idFonc): void
+    public function setIdFonc($idfonc): void
     {
-        $this->idFonc = $idFonc;
+        $this->idfonc = $idfonc;
     }
 
     /**
@@ -68,15 +68,15 @@ class Contacts extends Model{
      */
     public function getNomContact()
     {
-        return $this->nomContact;
+        return $this->nomcontact;
     }
 
     /**
-     * @param mixed $nomContact
+     * @param mixed $nomcontact
      */
-    public function setNomContact($nomContact): void
+    public function setNomContact($nomcontact): void
     {
-        $this->nomContact = $nomContact;
+        $this->nomContact = $nomcontact;
     }
 
     /**
@@ -84,15 +84,15 @@ class Contacts extends Model{
      */
     public function getPrenomContact()
     {
-        return $this->prenomContact;
+        return $this->prenomcontact;
     }
 
     /**
-     * @param mixed $prenomContact
+     * @param mixed $prenomcontact
      */
-    public function setPrenomContact($prenomContact): void
+    public function setPrenomContact($prenomcontact): void
     {
-        $this->prenomContact = $prenomContact;
+        $this->prenomContact = $prenomcontact;
     }
 
     /**
@@ -100,15 +100,15 @@ class Contacts extends Model{
      */
     public function getTelContact()
     {
-        return $this->telContact;
+        return $this->telcontact;
     }
 
     /**
-     * @param mixed $telContact
+     * @param mixed $telcontact
      */
-    public function setTelContact($telContact): void
+    public function setTelContact($telcontact): void
     {
-        $this->telContact = $telContact;
+        $this->telContact = $telcontact;
     }
 
     /**
@@ -116,15 +116,15 @@ class Contacts extends Model{
      */
     public function getEmailContact()
     {
-        return $this->emailContact;
+        return $this->emailcontact;
     }
 
     /**
-     * @param mixed $emailContact
+     * @param mixed $emailcontact
      */
-    public function setEmailContact($emailContact): void
+    public function setEmailContact($emailcontact): void
     {
-        $this->emailContact = $emailContact;
+        $this->emailcontact = $emailcontact;
     }
 
     /**
@@ -165,11 +165,11 @@ class Contacts extends Model{
         return $contacts;
     }
 
-    public function getOneById(int $idContact) : ?Contacts
+    public function getOneById(int $idcontact) : ?Contacts
     {
         $contact = Dao::getOne(self::class,
             [
-                'idContact' => $idContact
+                'idcontact' => $idcontact
             ]);
         if ($contact == false)
         {
@@ -183,13 +183,13 @@ class Contacts extends Model{
         Dao::insertOne($this,  get_object_vars($this));
     }
 
-    public function delete(int $idContact)
+    public function delete(int $idcontact)
     {
-        Dao::delete(self::class, ['idContact' => $idContact]);
+        Dao::delete(self::class, ['idcontact' => $idcontact]);
     }
     public function edit($args){
         Dao::edit(self::class,  $args, [
-            "idcontact"=>$this->idContact
+            "idcontact"=>$this->idcontact
         ]);
     
        }

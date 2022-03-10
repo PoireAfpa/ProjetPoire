@@ -241,7 +241,7 @@ class Clients extends Model
      */ 
     public function getCommentaireclient()
     {
-        return $this->commentaireclient;
+        return substr($this->commentaireclient,0,20);
     }
 
     /**

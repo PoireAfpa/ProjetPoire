@@ -28,7 +28,7 @@ use App\model\Contacts;
           <option selected>Choix...</option>
           <option value='Responsable RH'>Responsable RH</option>
           <option value='Commercial'>Commercial</option>
-          <option value='Responsable Développement3'>Responsable Développement</option>
+          <option value='Responsable Développement'>Responsable Développement</option>
           <option value='Technicien support'>Technicien support</option>
           <option value='Secrétaire Technique'>Secrétaire Technique</option>
           </select>
@@ -54,6 +54,9 @@ use App\model\Contacts;
 
           }
 ?>
+
+
+
 
 
 <!-----------------------------------------------------------RESPONSABLE DEVELOPPEMENT---------------------------------------------------------->
@@ -147,57 +150,7 @@ use App\model\Contacts;
           }
 ?>
 
-<!-- Modal edit client-->
 
-
-
-
-<div class="modal fade" id="modalEditClt" tabindex="-1" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalEditLabel">Modifier un client</h5>
-
-      </div>
-      <div class="modal-body">
-      <input type='text' class='form-control' placeholder='Raison sociale' name='raisonsociale'>
-          <input type='text' class='form-control' placeholder='Adresse client' name='adresseclient'>
-          <input type='text' class='form-control' placeholder='Code postal' name='codepostal'>
-          <input type='text' class='form-control' placeholder='Ville' name='ville'>
-          <input type='text' class='form-control' placeholder="Chiffre d\'affaires" name='ca'>
-          <input type='text' class='form-control' placeholder='Effectif' name='effectif'>
-          <input type='text' class='form-control' placeholder='Téléphone' name='telephone'>
-          <input type='text' class='form-control' placeholder='Type client' name='typeclient'>
-          <input type='text' class='form-control' placeholder='Nature client' name='natureclient'>
-          <input type='text' class='form-control' placeholder='Commentaires client' name='commentaireclient'>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Modifier</button>
-        <button  type="submit" name="docClt" class="btn btn btn-success">Ajouter doc</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal delete client-->
-<div class="modal fade" id="modalDelClt" tabindex="-1" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalDelLabel">Supprimer un client</h5>
-
-      </div>
-      <div class="modal-body">
-     
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" name="delClt"class="btn btn-primary">Supprimer</button>
-      </div>
-    </div>
-  </div>
-</div>
 <!-----------------------------------------------------------CONTACTS---------------------------------------------------------->
 <!-- Modal add CONTACT-->
 <div class="modal fade" id="modalAddCntct" tabindex="-1" >
@@ -240,68 +193,3 @@ use App\model\Contacts;
           }
 ?>
 
-<!-- Modal edit contact-->
-
-
-<script> 
-$(document).ready(function() {
-   $("#modalEditCntct").modal( {
-        keyboard: true,
-        backdrop: "static",
-        show: false,
-
-    }).on('show', function () {
-
-    });
-    $(".test").find('td[id]').on('click', function () {
-        debugger;
-
-        $('#modalEditCntct').html($('<b> Order Id selected: ' + $(this).data('id') + '</b>'));
-        $('#modalEditCntct').modal('show');
-
-  })});
-
-</script>
-
-
-<div class="modal fade" id="modalEditClt" tabindex="-1" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalEditLabel">Modifier un client</h5>
-
-      </div>
-      <div class="modal-body">
-      <input type='text' class='form-control' placeholder='Nom contact' name='nomcontact'>
-          <input type='text' class='form-control' placeholder='NPrénom contact' name='prenomcontact'>
-          <input type='text' class='form-control' placeholder='Téléphone' name='telcontact'>
-          <input type='text' class='form-control' placeholder='Mail' name='emailcontact'>
-          <input type='text' class='form-control' placeholder='Photo' name='photo'>
-          <input type='text' class='form-control' placeholder='Durée' name='duree'>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Modifier</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal delete contact-->
-<div class="modal fade" id="modalDelCntct" tabindex="-1" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalDelLabel">Supprimer un contact client</h5>
-
-      </div>
-      <div class="modal-body">
-     
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" name="delCntct" class="btn btn-primary">Supprimer</button>
-      </div>
-    </div>
-  </div>
-</div>

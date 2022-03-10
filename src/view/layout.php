@@ -37,14 +37,14 @@
                 <li class="nav-item">
                     <a class="nav-link <?php if ("/" . ($_SERVER['QUERY_STRING']) == "/home") {
                         echo " active";
-                    } ?>" href='http://localhost".BASE_URI."/home'>Home</a>
+                    } ?>" href="http://localhost/projetPoire/home">Home</a>
                 </li>
 
 
                 <li class="nav-item">
                     <a class="nav-link<?php if ("/" . ($_SERVER['QUERY_STRING']) == "/dashboard") {
                         echo " active";
-                    } ?>" href='http://localhost".BASE_URI."/dashboard'>Dashboard</a>
+                    } ?>" href='http://localhost/projetPoire/dashboard'>Dashboard</a>
                 </li>
                 <?php if (session_status() == PHP_SESSION_ACTIVE) {
                     echo '  <li class="nav-item">
@@ -77,7 +77,7 @@
 <?= $content ?>
 
 
-<footer class="bg-light text-center fixed-bottom text-lg-start">
+<!--<footer class="bg-light text-center fixed-bottom text-lg-start">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -103,7 +103,7 @@
                     Corrupti exercitationem cum dolores soluta
                     repudiandae corporis asperiores, tenetur repellendus dolore quibusdam quam vitae illo amet?
                 </div>
-            </div>
+            </div>-->
 
             <!-- Geolocation map-->
             <div class="col text-end ">
