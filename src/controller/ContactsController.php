@@ -33,23 +33,23 @@ class ContactsController extends Controller{
     public function edit($idContact){
         $contact=(new Contacts)->getOneById($idContact);
         $args=[];
-        if ($contact->getIdClient()!=$_POST["idClient"]){
-            $args["idClient"]=$_POST["idClient"];
+        if ($contact->getIdClient()!=$_POST["idclient"]){
+            $args["idclient"]=$_POST["idclient"];
         }
-        if ($contact->getIdFonc()!=$_POST["idFonc"]){
-            $args["idFonc"]=$_POST["idFonc"];
+        if ($contact->getIdFonc()!=$_POST["idfonc"]){
+            $args["idfonc"]=$_POST["idfonc"];
         }
-        if ($contact->getNomContact()!=$_POST["nomContact"]){
-            $args["nomContact"]=$_POST["nomContact"];
+        if ($contact->getNomContact()!=$_POST["nomcontact"]){
+            $args["nomcontact"]=$_POST["nomcontact"];
         }
-        if ($contact->getPrenomContact()!=$_POST["prenomContact"]){
-            $args["prenomContact"]=$_POST["prenomContact"];
+        if ($contact->getPrenomContact()!=$_POST["prenomcontact"]){
+            $args["prenomcontact"]=$_POST["prenomcontact"];
         }
-        if ($contact->getTelContact()!=$_POST["telContact"]){
-            $args["telContact"]=$_POST["telContact"];
+        if ($contact->getTelContact()!=$_POST["telcontact"]){
+            $args["telcontact"]=$_POST["telcontact"];
         }
-        if ($contact->getEmailContact()!=$_POST["emailContact"]){
-            $args["emailContact"]=$_POST["emailContact"];
+        if ($contact->getEmailContact()!=$_POST["emailcontact"]){
+            $args["emailcontact"]=$_POST["emailcontact"];
         }
         if ($contact->getPhoto()!=$_POST["photo"]){
             $args["photo"]=$_POST["photo"];

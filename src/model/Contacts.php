@@ -169,7 +169,7 @@ class Contacts extends Model{
     {
         $contact = Dao::getOne(self::class,
             [
-                'idContact' => $idContact
+                'idcontact' => $idContact
             ]);
         if ($contact == false)
         {
@@ -185,7 +185,7 @@ class Contacts extends Model{
 
     public function delete(int $idContact)
     {
-        Dao::delete(self::class, ['idContact' => $idContact]);
+        Dao::delete(self::class, ['idcontact' => $idContact]);
     }
     public function edit($args){
         Dao::edit(self::class,  $args, [

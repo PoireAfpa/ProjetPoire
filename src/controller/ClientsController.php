@@ -3,7 +3,7 @@
 namespace App\controller;
 
 use App\core\Controller;
-use App\src\model\Clients;
+use App\model\Clients;
 
 class ClientsController extends Controller
 {
