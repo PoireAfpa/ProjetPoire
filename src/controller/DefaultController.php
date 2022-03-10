@@ -23,5 +23,16 @@ class DefaultController extends Controller{
             $this->renderView("home");
         }
     }
-    
+    public function afficherContact(){ 
+        session_start();
+        if (!isset($_SESSION["isLogged"])||($_SESSION["isLogged"]=false)){
+            $this->redirectToRoute("contact");
+            $this->renderView("contact");
+        }
+       
+        else{
+            session_destroy();
+            $this->renderView("contact");
+        }
+    }   
 }
