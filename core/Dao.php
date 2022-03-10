@@ -18,7 +18,6 @@ final class Dao
     public static function connect()
     {
         $db_setting = parse_ini_file(__DIR__.'/../config.ini');
-
         try {
             self::$cnx = new \PDO(
                 "mysql:host={$db_setting['host']};dbname={$db_setting['dbname']};port={$db_setting['port']};charset=UTF8",

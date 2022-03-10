@@ -554,37 +554,39 @@ if (isset($_POST['viewClt'])){
     $html.='<td class= "text-center align-middle">'.$customer->getTypeclient().'</td>';
     $html.='<td class= "text-center align-middle">'.$customer->getNatureclient().'</td>';
     $html.='<td class= "text-center align-middle">'.$customer->getCommentaireclient().'</td>';
-    $html.=' <td><button type="submit" name="editClt" data-bs-target="#modalEditClt" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
-    <td><input name="delClt"  value="Supprimer" type="submit" class="btn-sm btn btn-danger test" data-bs-toggle="modal" data-bs-target="#modalDelClt"/></a></td>';
-    $html.='<td><input name="docClt"  value="Add document" type="submit" class="btn-sm btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDoc'.$customer->getIdclient().'"/></a></td>';
-    /* // Modal add doc client//
+    $html.=' <td><button type="submit" name="editClt" data-bs-target="#modalEditClt'.$customer->getIdclient().'" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
+    <td><input name="delClt"  value="Supprimer" type="submit" class="btn-sm btn btn-danger test" data-bs-toggle="modal" data-bs-target="#modalDelClt'.$customer->getIdclient().'"/></a></td>';
+    $html.='<td><input name="docClt"  value="Add document" type="submit" class="btn-sm btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalDocClt'.$customer->getIdclient().'"/></a></td>';
+    // Modal add doc client//
      $modalDoc.='
-     <div class="modal fade" id="modalDoc'.$customer->getIdclient().'" tabindex="-1" >
+     <div class="modal fade" id="modalDocClt'.$customer->getIdclient().'" tabindex="-1" >
        <div class="modal-dialog">
          <div class="modal-content">
-           <div class="modal-header">
-             <h5 class="modal-title" id="modalDocLabel">Ajouter un document</h5>
-     
-           </div>
-           <form action="'.BASE_URI.'/dahsboard/client/addDoc/'.$customer->getIdclient().'" method="post" enctype="multipart/form-data>
-           <div class="modal-body">
-            <div class="input-group">
-           <div class="custom-file">
-             <input type="file" class="custom-file-input" name="mon_fichier" id="addDoc">
-             <label class="custom-file-label" for="addDoc">Choisissez un document</label>
-           </div>
-           </div>
-           <div class="modal-footer">
-             <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
-             <button type="submit" name="addFile" class="btn btn-primary">Ajouter</button>
-           </div>
-           </form>
+                  <form action="'.BASE_URI.'/dahsboard/client/addDoc/'.$customer->getIdclient().'" method="post" enctype="multipart/form-data>
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalDocLabel">Ajouter un document</h5>
+              
+                    </div>
+                    
+                    <div class="modal-body">
+                      <div class="input-group">
+                      <div class="custom-file">
+                      <input type="file" class="custom-file-input" name="mon_fichier" id="addDoc">
+                      <label class="custom-file-label" for="addDoc">Choisissez un document</label>
+                      </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+                      <button type="submit" name="addFile" class="btn btn-primary">Ajouter</button>
+                    </div>
+                  </form>
          </div>
        </div>
      </div>';
       /* Modal edit client*/
-   /* $modalEdit.='
-   <div class="modal fade" id="modalEditClt"'.$customer->getIdclient().' tabindex="-1" >
+   $modalEdit.='
+   <div class="modal fade" id="modalEditClt'.$customer->getIdclient().'" tabindex="-1" >
      <div class="modal-dialog">
        <div class="modal-content">
          <div class="modal-header">
@@ -593,16 +595,16 @@ if (isset($_POST['viewClt'])){
          </div>
          <form action="'.BASE_URI.'/dahsboard/client/edit/'.$customer->getIdclient().'" method="post">
          <div class="modal-body">
-         <input type="text" class="form-control" value="'.$customer->getRaisonsociale().'" placeholder="Raison sociale" name="raisonsociale">
-             <input type="text" class="form-control" value="'.$customer->getAdresseclient().'"  placeholder="Adresse client" name="adresseclient">
-             <input type="text" class="form-control" value="'.$customer->getCodepostal().'"  placeholder="Code postal" name="codepostal">
-             <input type="text" class="form-control" value="'.$customer->getVilleclient().'"  placeholder="Ville" name="ville">
-             <input type="text" class="form-control" value="'.$customer->getCa().'"  placeholder="Chiffre d\"affaires" name="ca">
-             <input type="text" class="form-control" value="'.$customer->getEffectif().'"  placeholder="Effectif" name="effectif">
-             <input type="text" class="form-control" value="'.$customer->getTelephoneclient().'" placeholder="Téléphone" name="telephone">
-             <input type="text" class="form-control" value="'.$customer->getTypeclient().'" placeholder="Type client" name="typeclient">
-             <input type="text" class="form-control" value="'.$customer->getNatureclient().'" placeholder="Nature client" name="natureclient">
-             <input type="text" class="form-control" value="'.$customer->getCommentaireclient().'" placeholder="Commentaires client" name="commentaireclient">
+              <input type="text" class="form-control" value="'.$customer->getRaisonsociale().'" placeholder="Raison sociale" name="raisonsociale">
+              <input type="text" class="form-control" value="'.$customer->getAdresseclient().'"  placeholder="Adresse client" name="adresseclient">
+              <input type="text" class="form-control" value="'.$customer->getCodepostal().'"  placeholder="Code postal" name="codepostal">
+              <input type="text" class="form-control" value="'.$customer->getVilleclient().'"  placeholder="Ville" name="ville">
+              <input type="text" class="form-control" value="'.$customer->getCa().'"  placeholder="Chiffre d\"affaires" name="ca">
+              <input type="text" class="form-control" value="'.$customer->getEffectif().'"  placeholder="Effectif" name="effectif">
+              <input type="text" class="form-control" value="'.$customer->getTelephoneclient().'" placeholder="Téléphone" name="telephone">
+              <input type="text" class="form-control" value="'.$customer->getTypeclient().'" placeholder="Type client" name="typeclient">
+              <input type="text" class="form-control" value="'.$customer->getNatureclient().'" placeholder="Nature client" name="natureclient">
+              <input type="text" class="form-control" value="'.$customer->getCommentaireclient().'" placeholder="Commentaires client" name="commentaireclient">
          </div>
          <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -614,8 +616,8 @@ if (isset($_POST['viewClt'])){
      </div>
    </div>';
     /* Modal delete client*/
-  /* $modalDelete.='
-   <div class="modal fade" id="modalDel'.$customer->getIdclient().'" tabindex="-1" >
+  $modalDelete.='
+   <div class="modal fade" id="modalDelClt'.$customer->getIdclient().'" tabindex="-1" >
      <div class="modal-dialog">
        <div class="modal-content">
          <div class="modal-header">
@@ -633,7 +635,7 @@ if (isset($_POST['viewClt'])){
          </form>
        </div>
      </div>
-   </div>';*/
+   </div>';
  };
    $html.='</tr></tbody></table>';
    echo $html;
@@ -674,10 +676,10 @@ foreach($contacts as $contact){
    $html.='<td class= "text-center align-middle">'.$contact->getEmailContact().'</td>';
    $html.='<td class= "text-center align-middle">'.$contact->getPhoto().'</td>';
    $html.='<td class= "text-center align-middle">'.$contact->getDuree().'</td>';
-   $html.=' <td><button  data-id="'.$contact->getIdcontact().'" data-login="'.$contact->getNomContact().'" type="submit" name="editCntct" data-bs-target="#modalEditCntct" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
+   $html.=' <td><button  data-id="'.$contact->getIdcontact().'" data-login="'.$contact->getNomContact().'" type="submit" name="editCntct" data-bs-target="#modalEditCntct'.$contact->getIdContact().'" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
    <td><input name="delCntct"  value="Supprimer" type="submit" class="btn-sm btn btn-danger test" data-bs-toggle="modal" data-bs-target="#modalDelCntct"/></a></td>';
    /* Modal edit contact*/
-   $modalEdit='
+   $modalEdit.='
    <div class="modal fade" id="modalEditCntct"'.$contact->getIdContact().' tabindex="-1" >
      <div class="modal-dialog">
        <div class="modal-content">

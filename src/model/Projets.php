@@ -94,4 +94,15 @@ private $typeprojet;
         Dao::insertOne($this,  get_object_vars($this));
     }
 
+    public function edit($args){
+        Dao::edit(self::class,  $args, [
+            "codeprojet"=>$this->codeprojet
+        ]);
+       }
+
+    public function delete(int $codeprojet)
+       {
+           Dao::delete(self::class, ['codeprojet' => $codeprojet]);
+       }
+
 }

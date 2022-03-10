@@ -90,5 +90,11 @@ class UsersController extends Controller{
 
   }
 
-       
+  public function afficherContact(){ 
+    session_start();
+    if (!isset($_SESSION["isLogged"])||($_SESSION["isLogged"]=false)){
+        $this->redirectToRoute("login");
+    }
+    $this->renderView("contact");
+}   
 }
