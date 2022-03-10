@@ -27,7 +27,7 @@ class ContactsController extends Controller{
             $contact->setDuree($_POST['duree']);
             $contact->insert();
         }
-        $this->renderView("contact/add");
+        $this->renderView("dashboard");
     }
 
     public function edit($idContact){
@@ -63,7 +63,7 @@ class ContactsController extends Controller{
 
     public function delete($idContact) {   
         $contact = (new Contacts())->delete($idContact);
-        $this->renderView("contact/delete");
+        $this->renderView("dashboard");
     }
     
 }
