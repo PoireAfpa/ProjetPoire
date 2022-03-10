@@ -1,15 +1,16 @@
 <?php
+
 namespace App\controller;
 
 use App\core\Controller;
 use App\model\Projets;
 
-class ProjetsController extends Controller 
-{
+class ProjetsController extends Controller {
+    
     public function list(){
-        $contacts = (new Projets())->getAll();
-        $this->renderView('contact/list', [
-            'contacts' => $contacts
+        $projets = (new Projets())->getAll();
+        $this->renderView('projet/list', [
+            'projets' => $projets
         ]);
     }
 
@@ -21,9 +22,8 @@ class ProjetsController extends Controller
             $projet->setTypeProjet($_POST['typeprojet']);
             $projet->insert();
         }
-        $this->renderView("contact/add");
+        $this->renderView("dashboard");
     }
-
     
     public function edit($codeprojet){
         $projet=(new Projets)->getOneById($codeprojet);
@@ -38,11 +38,12 @@ class ProjetsController extends Controller
             $args["typeprojet"]=$_POST["typeprojet"];
         }
         $projet->edit($args);
-        $this->redirectToRoute("dahsboard/contact/edit/#idcontact");
+        $this->redirectToRoute("dahsboard/projet/edit/#codeprojet");
     }
 
     public function delete($codeprojet) {   
         $projet = (new Projets())->delete($codeprojet);
-        $this->renderView("contact/delete");
+        $this->renderView("dahsboard");
     }
+    
 }
