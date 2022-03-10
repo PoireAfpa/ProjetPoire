@@ -27,7 +27,6 @@ class DefaultController extends Controller{
     public function afficherContact(){ 
         session_start();
         if (!isset($_SESSION["isLogged"])||($_SESSION["isLogged"]=false)){
-            $this->redirectToRoute("contact");
             $this->renderView("contact");
         }
        
