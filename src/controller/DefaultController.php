@@ -3,6 +3,7 @@
 namespace App\controller;
 
 use App\core\Controller;
+use app\model\Users;
 
 //recup requetes
 //demander au modele de recuperer les infos et structures
@@ -34,5 +35,7 @@ class DefaultController extends Controller{
             session_destroy();
             $this->renderView("contact");
         }
-    }   
+    }  
+ 
+   
 }

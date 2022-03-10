@@ -40,40 +40,40 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link <?php if ("/" . ($_SERVER['QUERY_STRING']) == "/home") {
-                        echo " active";
-                    } ?>" href="http://localhost<?=BASE_URI?>/home"?>Home</a>
-                </li>
+                <?php if (("/" . ($_SERVER['QUERY_STRING']) == "/home") && (session_status() == PHP_SESSION_ACTIVE)){
+                        echo " <a class='nav-link active' href='http://localhost/projetPoire/home'>Home</a> </li>";  
+                        echo " <li class='nav-item'><a class='nav-link ' href='http://localhost/projetPoire/dashboard'>Dashboard</a>  </li>"; 
+                        echo " <li class='nav-item'><a class='nav-link ' href='http://localhost/projetPoire/logout'>Logout</a>  </li>"; 
+                        }
+                        elseif (("/" . ($_SERVER['QUERY_STRING']) == "/dashboard") && (session_status() == PHP_SESSION_ACTIVE)){
+                            echo " <a class='nav-link ' href='http://localhost/projetPoire/home'>Home</a> </li>";  
+                            echo " <li class='nav-item active'><a class='nav-link ' href='http://localhost/projetPoire/dashboard'>Dashboard</a>  </li>"; 
+                            echo " <li class='nav-item'><a class='nav-link ' href='http://localhost/projetPoire/logout'>Logout</a>  </li>"; 
+                            }
+                        elseif("/" . ($_SERVER['QUERY_STRING']) == "/home"){
+                            echo " <a class='nav-link active' href='http://localhost/projetPoire/home'>Home</a> </li>"; 
+                            echo " <a class='nav-link ' href='http://localhost/projetPoire/login'>Login</a> </li>";  
+                        }
+                        else{
+
+                            echo " <a class='nav-link ' href='http://localhost/projetPoire/home'>Home</a> </li>"; 
+                            echo " <a class='nav-link active' href='http://localhost/projetPoire/login'>Login</a> </li>";  
+                        }
 
 
-                <li class="nav-item">
-                    <a class="nav-link<?php if ("/" . ($_SERVER['QUERY_STRING']) == "/dashboard") {
-                        echo " active";
-                    } ?>" href="http://localhost<?=BASE_URI?>/dashboard"?>Dashboard</a>
-                </li>
-                <?php if (session_status() == PHP_SESSION_ACTIVE) {
-                    echo '  <li class="nav-item">
-        <a class="nav-link" href="http://localhost'.BASE_URI.'/logout"<?php if ("/".($_SERVER["QUERY_STRING"])=="/logout"){echo" active";}?>Logout</a>
-      </li>';
-                } else {
-                    echo '<li class="nav-item">
-        <a class="nav-link" href="http://localhost'.BASE_URI.'/login">Login</a>
-      </li>';
-                }; ?>
+                        
 
-            </ul>
-            <?php if ((("/" . ($_SERVER['QUERY_STRING']) == "/dashboard")) && (session_status() == PHP_SESSION_ACTIVE)) /*&& ($_SESSION["role"] == "admin")) */{
-             
-   
-         /*<form class='form-inline my-2 my-lg-0'>
-      
-            <input type='search' class='form-control mr-sm-2'  placeholder='Chercher un dossier'>
-        
-         <a class='nav-link'name='btnSearch'value='afficher'type='submit'>Rechercher</a>
-        
-          </form> 
-        ";*/
-            }; ?>
+
+                         ?>
+                            
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                
 
 
     </nav>

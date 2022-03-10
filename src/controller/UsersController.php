@@ -36,6 +36,8 @@ class UsersController extends Controller{
     }
 
     public function afficherLogout(){
+        
+      
         session_start();
         session_destroy();
         $this->redirectToRoute("login");
@@ -77,18 +79,7 @@ class UsersController extends Controller{
         $this->redirectToRoute("dashboard");
 
     }
-  public function addDoc(){
-    if(isset($_POST["addFile"])) {
-        $target_dir = "files/";
-        $target_file = $target_dir . basename($_FILES["mon_fichier"]["name"]);
-        move_uploaded_file($_FILES["mon_fichier"]["tmp_name"], $target_file);
-      
-       
-       
-    }
-     $this->redirectToRoute("dashboard");
-
-  }
+  
 
  
 }

@@ -76,7 +76,7 @@ class Contacts extends Model{
      */
     public function setNomContact($nomcontact): void
     {
-        $this->nomContact = $nomcontact;
+        $this->nomcontact = $nomcontact;
     }
 
     /**
@@ -92,7 +92,7 @@ class Contacts extends Model{
      */
     public function setPrenomContact($prenomcontact): void
     {
-        $this->prenomContact = $prenomcontact;
+        $this->prenomcontact = $prenomcontact;
     }
 
     /**
@@ -108,7 +108,7 @@ class Contacts extends Model{
      */
     public function setTelContact($telcontact): void
     {
-        $this->telContact = $telcontact;
+        $this->telcontact = $telcontact;
     }
 
     /**
