@@ -671,7 +671,7 @@ if (isset($_POST['viewClt'])){
    $html.='<td class= "text-center align-middle">'.$contact->getPrenomContact().'</td>';
    $html.='<td class= "text-center align-middle">'.$contact->getTelContact().'</td>';
    $html.='<td class= "text-center align-middle">'.$contact->getEmailContact().'</td>';
-   $html.='<td class= "text-center align-middle">'.$contact->getPhoto().'</td>';
+   $html.='<td class= "text-center align-middle"><img src='.$contact->getPhoto().'></td>';
    $html.='<td class= "text-center align-middle">'.$contact->getDuree().'</td>';
    $html.=' <td><button  data-id="'.$contact->getIdcontact().'" data-login="'.$contact->getNomContact().'" type="submit" name="editCntct" data-bs-target="#modalEdit'.$contact->getIdContact().'" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
    <td><input name="delCntct"  value="Supprimer" type="submit" class="btn-sm btn btn-danger test" data-bs-toggle="modal" data-bs-target="#modalDelCntct'.$contact->getIdContact().'"/></a></td>';
