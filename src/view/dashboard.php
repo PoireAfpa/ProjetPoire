@@ -296,7 +296,7 @@ if (isset($_POST['viewClt'])){
 
     $html.='<tr>';
     $html.='<td class= "text-center align-middle">'.$client->getIdclient().'</td>';
-    $html.='<td class= "text-center align-middle">'.$client->getRaisonsocial().'</td>';
+    $html.='<td class= "text-center align-middle">'.$client->getRaisonsociale().'</td>';
     $html.='<td class= "text-center align-middle">'.$client->getAdresseclient().'</td>';
     $html.='<td class= "text-center align-middle">'.$client->getCodepostal().'</td>';
     $html.='<td class= "text-center align-middle">'.$client->getVilleclient().'</td>';
@@ -309,7 +309,7 @@ if (isset($_POST['viewClt'])){
 
 
 
-    $html.=' <td><button  data-id="'.$client->getIdclient().'" data-login="'.$client->getRaisonsocial().'" type="submit" name="editClt" data-bs-target="#modalEditClt" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
+    $html.=' <td><button  data-id="'.$client->getIdclient().'" data-login="'.$client->getRaisonsociale().'" type="submit" name="editClt" data-bs-target="#modalEditClt" data-bs-toggle="modal" class="btn-sm btn btn-success">Modifier</button></td>
     <td><input name="delClt"  value="Supprimer" type="submit" class="btn-sm btn btn-danger test" data-bs-toggle="modal" data-bs-target="#modalDelClt"/></a></td>';
    
  };

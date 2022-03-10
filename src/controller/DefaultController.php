@@ -1,5 +1,7 @@
 <?php
+
 namespace App\controller;
+
 use App\core\Controller;
 
 //recup requetes
@@ -11,17 +13,15 @@ use App\core\Controller;
 
 class DefaultController extends Controller{
 
-
-public function afficherHome(){
-    
+    public function afficherHome(){
         session_start();
-    if (!empty($_SESSION)){
-        $this->renderView("home");
-
-}else{
-    session_destroy();
-    $this->renderView("home");
-}
-
-}
+        if (!empty($_SESSION)){
+            $this->renderView("home");
+        }
+        else{
+            session_destroy();
+            $this->renderView("home");
+        }
+    }
+    
 }
