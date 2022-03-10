@@ -37,22 +37,22 @@
                 <li class="nav-item">
                     <a class="nav-link <?php if ("/" . ($_SERVER['QUERY_STRING']) == "/home") {
                         echo " active";
-                    } ?>" href="http://localhost/copiegith/home">Home</a>
+                    } ?>" href='http://localhost'.BASE_URI.'/home'>Home</a>
                 </li>
 
 
                 <li class="nav-item">
                     <a class="nav-link<?php if ("/" . ($_SERVER['QUERY_STRING']) == "/dashboard") {
                         echo " active";
-                    } ?>" href="http://localhost/copiegith/dashboard">Dashboard</a>
+                    } ?>" href='http://localhost'.BASE_URI.'/dashboard'>Dashboard</a>
                 </li>
                 <?php if (session_status() == PHP_SESSION_ACTIVE) {
                     echo '  <li class="nav-item">
-        <a class="nav-link" href="http://localhost/copiegith/logout"<?php if ("/".($_SERVER["QUERY_STRING"])=="/logout"){echo" active";}?>Logout</a>
+        <a class="nav-link" href="http://localhost'.BASE_URI.'/logout"<?php if ("/".($_SERVER["QUERY_STRING"])=="/logout"){echo" active";}?>Logout</a>
       </li>';
                 } else {
                     echo '<li class="nav-item">
-        <a class="nav-link" href="http://localhost/copiegith/login">Login</a>
+        <a class="nav-link" href="http://localhost'.BASE_URI.'/login">Login</a>
       </li>';
                 }; ?>
 

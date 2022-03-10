@@ -187,5 +187,10 @@ class Contacts extends Model{
     {
         Dao::delete(self::class, ['idContact' => $idContact]);
     }
-
+    public function edit($args){
+        Dao::edit(self::class,  $args, [
+            "idcontact"=>$this->idContact
+        ]);
+    
+       }
 }
